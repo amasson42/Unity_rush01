@@ -5,9 +5,9 @@ using UnityEngine;
 public class ItemInventory : MonoBehaviour {
 
 	public ItemEntity entityPrefab;
-	 public ItemEntity entityInstance = null;
-
-	public ItemType type = ItemType.Weapon;
+	public ItemEntity entityInstance = null;
+	public Loot.Type type = Loot.Type.Weapon;
+	public Loot.Rarity rarity;
 	public int level;
 	public float minDamage;
 	public float maxDamage;

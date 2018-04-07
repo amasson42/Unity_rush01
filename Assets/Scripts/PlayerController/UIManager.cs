@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour {
 			ItemEntity item = hit.collider.GetComponent<ItemEntity>();
 
 			if (item && item.gameObject.activeSelf) {
-				highlightNodeLight.color = Color.yellow;
+				highlightNodeLight.color = Loot.RarityColors[(int)item.rarity];
 				highlightNode.transform.position = item.transform.position;
 				highlightNode.SetActive(true);
 			} else
