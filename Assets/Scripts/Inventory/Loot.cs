@@ -9,8 +9,7 @@ public class Loot : MonoBehaviour {
 
 	void Start () {
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	}
 
@@ -42,8 +41,8 @@ public class Loot : MonoBehaviour {
 	{
 		entity.itemPrefab.type = entity.type;
 		entity.itemPrefab.level = level;
-		entity.itemPrefab.minDamage = Random.Range(2.5f, 5f) * level;
-		entity.itemPrefab.maxDamage = Random.Range(entity.itemPrefab.minDamage, entity.itemPrefab.minDamage * 2f);
+		entity.itemPrefab.minDamage = Random.Range(20f, 25f) * (1 + level * 0.2f);
+		entity.itemPrefab.maxDamage = Random.Range(entity.itemPrefab.minDamage, entity.itemPrefab.minDamage * 1.5f);
 		entity.itemPrefab.attackSpeed = Random.Range(1f, 2f);
 	}
 }
