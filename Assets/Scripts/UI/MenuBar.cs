@@ -15,16 +15,14 @@ public class MenuBar : MonoBehaviour
 		txt = transform.Find("txt").GetComponent<Text>();
 	}
 	
-	public void SetVal(string str, float min, float max)
+	public void SetVal(string str, float v, float min, float max)
 	{
-		if (max == 0.0f)
-			txt.text = str;
+		float len = max - min;
+		float prc = (v - min) / len;
+		val.anchorMax = new Vector2(Mathf.Clamp(prc, 0f, 1f), 1f);
+		if (str == "")
+			txt.text = "";
 		else
-		{
-			float len = max - min;
-			float tot = min + max;
-			float prc = tot / len;
-			txt.text = str + Mathf.RoundToInt(min) + " / " + Mathf.RoundToInt(max);
-		}
+			txt.text = str + Mathf.RoundToInt(v) + " / " + Mathf.RoundToInt(max);
 	}
 }
