@@ -5,7 +5,13 @@ using UnityEngine;
 public class ItemInventory : MonoBehaviour {
 
 	public ItemEntity entityPrefab;
-	[HideInInspector] public ItemEntity entityInstance = null;
+	 public ItemEntity entityInstance = null;
+
+	public ItemType type = ItemType.Weapon;
+	public int level;
+	public float minDamage;
+	public float maxDamage;
+	public float attackSpeed;
 	
 	void Start () {
 		

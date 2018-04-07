@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65431680708297438}
   - component: {fileID: 114435388967926334}
   m_Layer: 8
-  m_Name: Sword
+  m_Name: SwordEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,5 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53677f01983444838cb52d3c1348d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 114032041574705634, guid: fcef5bb31cfb24382a774abc33b67890,
+    type: 2}
   itemInstance: {fileID: 0}
+  maxLootNB: 1
+  type: 0

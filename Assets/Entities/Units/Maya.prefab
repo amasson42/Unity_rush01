@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 114756536379116060}
   - component: {fileID: 114210099961771680}
   - component: {fileID: 114147080888347466}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Maya
   m_TagString: unitEntity
   m_Icon: {fileID: 0}
@@ -2689,6 +2689,7 @@ MonoBehaviour:
   - {fileID: 114123698205338106}
   - {fileID: 114129706850129986}
   - {fileID: 114111057027614546}
+  loots: []
   currentTarget: {fileID: 0}
 --- !u!137 &137032090602870992
 SkinnedMeshRenderer:

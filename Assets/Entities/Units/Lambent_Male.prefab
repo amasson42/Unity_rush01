@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 114064839047506332}
   - component: {fileID: 114483793419014448}
   - component: {fileID: 114081823457765446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lambent_Male
   m_TagString: unitEntity
   m_Icon: {fileID: 0}
@@ -2531,9 +2531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChance: 15
+  lootChance: 100
   loots:
-  - {fileID: 114701397673092620, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
+  - {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
 --- !u!114 &114483793419014448
 MonoBehaviour:
   m_ObjectHideFlags: 1

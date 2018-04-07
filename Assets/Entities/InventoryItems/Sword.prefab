@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224712632889321378}
   - component: {fileID: 222040410204843456}
   - component: {fileID: 114226413969944850}
-  - component: {fileID: 114778772242296342}
+  - component: {fileID: 114032041574705634}
   m_Layer: 5
   m_Name: Sword
   m_TagString: Untagged
@@ -29,6 +29,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114032041574705634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761256931730806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ad93bc4f79446678322153fbc89622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityPrefab: {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09,
+    type: 2}
+  entityInstance: {fileID: 0}
+  type: 0
+  level: 4
+  minDamage: 19.239449
+  maxDamage: 29.5565
+  attackSpeed: 1.1775311
 --- !u!114 &114226413969944850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,20 +74,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &114778772242296342
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1761256931730806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6662b8d78663243a1b1d1b6fea0748de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityPrefab: {fileID: 0}
-  entityInstance: {fileID: 0}
-  maxLootNB: 1
 --- !u!222 &222040410204843456
 CanvasRenderer:
   m_ObjectHideFlags: 1

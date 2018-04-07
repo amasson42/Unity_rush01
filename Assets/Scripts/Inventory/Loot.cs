@@ -8,7 +8,6 @@ public class Loot : MonoBehaviour {
 	public ItemEntity[]	loots;
 
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -24,9 +23,11 @@ public class Loot : MonoBehaviour {
 		int lootNB = Random.Range(1, loot.maxLootNB + 1);
 		for (int i = 0; i < lootNB; ++i)
 		{
-			loot.level = level;
 			Vector3 position = new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y + 2f, transform.position.z + Random.Range(-3f, 3f));
-			Instantiate(loot, position, transform.rotation);
+			loot = Instantiate(loot, position, transform.rotation);
+			generateStats(ref loot, level);
+			loot.itemInstance = Instantiate(loot.itemPrefab, position, transform.rotation);
+			loot.itemInstance.entityInstance = loot;
 		}
 	}
 
@@ -35,5 +36,14 @@ public class Loot : MonoBehaviour {
 		if (Random.Range(0f, 100f) <= lootChance)
 			return (true);
 		return (false);
+	}
+
+	void generateStats(ref ItemEntity entity, int level)
+	{
+		entity.itemPrefab.type = entity.type;
+		entity.itemPrefab.level = level;
+		entity.itemPrefab.minDamage = Random.Range(2.5f, 5f) * level;
+		entity.itemPrefab.maxDamage = Random.Range(entity.itemPrefab.minDamage, entity.itemPrefab.minDamage * 2f);
+		entity.itemPrefab.attackSpeed = Random.Range(1f, 2f);
 	}
 }
