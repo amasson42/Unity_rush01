@@ -69,11 +69,13 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
+	public void ResetAttackCooldown() {
+		attackCooldown = currentWeaponPeriod;
+	}
+
 	public void AutoAttack(Unit target) {
-		if (target) {
+		if (target)
 			target.TakeDamages(currentDamage, this);
-			attackCooldown = currentWeaponPeriod;
-		}
 	}
 
 	public void TakeDamages(float amount, Unit sender) {

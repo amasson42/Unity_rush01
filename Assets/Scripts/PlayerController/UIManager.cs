@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour {
 
 	public PlayerEntityController playerEntityController;
 
+	public GameObject highlightNode;
+	private Light highlightNodeLight;
 	public Unit unit;
 	public Image lifeBarMask;
 	public Text lifeText;
@@ -29,6 +31,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		statsPanel.gameObject.SetActive(false);
+		highlightNodeLight = highlightNode.GetComponentInChildren<Light>();
 	}
 	
 	// Update is called once per frame
@@ -59,13 +62,17 @@ public class UIManager : MonoBehaviour {
 		}
 
 		if (target) {
-			if (target.unit && target.unit.actor) {
+			if (target.unit) {
 				enemyNameText.text = "(" + target.unit.level + ")" + target.unit.unitName;
 				enemyLifeBarMask.fillAmount = Mathf.Clamp(target.unit.currentHealth / target.unit.maxHealth, 0, 1);
 				enemyLifeText.text = "" + (int)target.unit.currentHealth + "/" + (int)target.unit.maxHealth;
+				highlightNodeLight.color = target.unit.team == 1 ? Color.green : Color.red;
 			}
+			highlightNode.transform.position = target.transform.position;
+			highlightNode.SetActive(true);
 			enemyPanel.gameObject.SetActive(true);
 		} else {
+			highlightNode.SetActive(false);
 			enemyPanel.gameObject.SetActive(false);
 		}
 	}

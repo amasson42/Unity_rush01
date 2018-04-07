@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Shock : SpellEntity {
 
+	float delay = 0.4f;
+	bool dead = false;
+
 	// Use this for initialization
 	void Start() {
 		Vector3 direction = pointTarget - transform.position;
@@ -16,9 +19,18 @@ public class Shock : SpellEntity {
 	
 	// Update is called once per frame
 	void Update() {
-		transform.position = Vector3.MoveTowards(transform.position, pointTarget, 8.0f * Time.deltaTime);
-		if ((transform.position - pointTarget).sqrMagnitude < 0.1f)
-			Destroy(gameObject);
+		if (delay > 0.0f)
+			delay -= Time.deltaTime;
+		else if (!dead) {
+			transform.position = Vector3.MoveTowards(transform.position, pointTarget, 8.0f * Time.deltaTime);
+			if ((transform.position - pointTarget).sqrMagnitude < 0.1f)
+			{
+				Destroy(gameObject, 1.0f);
+				dead = true;
+			}
+		} else {
+			transform.localScale -= new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+		}
 	}
 
 	void OnTriggerEnter(Collider collider) {

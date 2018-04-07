@@ -21,7 +21,7 @@ public class Slash : SpellEntity {
 		lifeTime -= Time.deltaTime;
 		if (lifeTime <= 0.0f)
 			Destroy(gameObject);
-		caster.transform.Rotate(new Vector3(0, -3 * 360.0f * Time.deltaTime, 0));
+		caster.transform.Rotate(new Vector3(0, -2 * 360.0f * Time.deltaTime, 0));
 	}
 
 	void OnTriggerEnter(Collider collider) {

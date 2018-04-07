@@ -41,10 +41,15 @@ public class Actor : MonoBehaviour {
 		if (IsAtAttackRange(currentTarget)) {
 			transform.LookAt(currentTarget.transform);
 			if (unit.attackCooldown <= 0.0f) {
-				unit.AutoAttack(currentTarget.unit);
+				unit.ResetAttackCooldown();
 				animator.SetTrigger("Attack" + unit.weaponAttackAnimation);
 			}
 		}
+	}
+
+	public void AnimationAttackPointEvent() {
+		if (currentTarget)
+			unit.AutoAttack(currentTarget.unit);
 	}
 
 	public bool IsAtAttackRange(Actor target) {
