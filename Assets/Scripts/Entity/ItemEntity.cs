@@ -12,11 +12,9 @@ public class ItemEntity : MonoBehaviour {
 	public int maxLootNB = 1;
 	public ItemType type;
 
-	// Use this for initialization
 	void Start () {
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 	}

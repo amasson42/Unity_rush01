@@ -34,9 +34,17 @@ public class PlayerEntityController : MonoBehaviour {
 			if (hitActor && hitActor.unit && hitActor.unit.team != unit.team) {
 				actor.OrderAttackTarget(hitActor);
 			} else {
-				actor.OrderMoveToTarget(hit.point);
-				moveMarkNode.transform.position = hit.point;
-				moveMarkNode.SetActive(true);
+				/* ADD QHONORE */
+				ItemEntity item = hit.collider.GetComponent<ItemEntity>();
+
+				if (item) {
+					actor.OrderLootItem(item);
+				} else {
+				/* END ADD QHONORE */
+					actor.OrderMoveToTarget(hit.point);
+					moveMarkNode.transform.position = hit.point;
+					moveMarkNode.SetActive(true);
+				}
 			}
 		}
 		if (Input.GetMouseButtonUp(0)) {

@@ -13,6 +13,12 @@ public class Actor : MonoBehaviour {
 	[HideInInspector] public Loot[] loots;
 	[HideInInspector] public Actor currentTarget = null;
 
+	/* ADD QHONORE */
+	/*[HideInInspector] */public ItemEntity currentTargetItem = null;
+
+	/*[HideInInspector] */public List<ItemInventory> items;
+	/* END ADD QHONORE */
+
  	void Start() {
 		if (animator == null)
 			animator = GetComponent<Animator>();
@@ -33,6 +39,13 @@ public class Actor : MonoBehaviour {
 				} else {
 					currentTarget = null;
 				}
+				/* ADD QHONORE */
+				if (currentTargetItem && pathComplete()) {
+					items.Add(currentTargetItem.itemInstance);
+					currentTargetItem.gameObject.SetActive(false);
+					currentTargetItem = null;
+				}
+				/* END ADD QHONORE */
 			}
 			animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
 		}
@@ -73,12 +86,14 @@ public class Actor : MonoBehaviour {
 			agent.stoppingDistance = 0.0f;
 		}
 		currentTarget = null;
+		currentTargetItem = null;/* ADD QHONORE */
 	}
 
 	public void OrderAttackTarget(Actor target) {
 		if (unit && !unit.isAlive)
 			return ;
 		currentTarget = target;
+		currentTargetItem = null;/* ADD QHONORE */
 	}
 
 	public bool OrderUseSpell(int spellIndex, Vector3 targetPoint, Actor targetActor, out string error) {
@@ -95,6 +110,24 @@ public class Actor : MonoBehaviour {
 		sc.pointTarget = targetPoint;
 		return sc.TryCast(out error);
 	}
+
+	/* ADD QHONORE */
+	public void OrderLootItem(ItemEntity item) {
+		if (unit && !unit.isAlive)
+			return ;
+		if (agent) {
+			agent.SetDestination(item.transform.position);
+			agent.stoppingDistance = 0.0f;
+		}
+		currentTargetItem = item;
+		currentTarget = null;
+	}
+
+	public bool pathComplete()
+    {
+		return (agent.remainingDistance == 0 && agent.pathStatus == NavMeshPathStatus.PathComplete);
+    }
+	/* END ADD QHONORE */
 
 	public void PlayDeadAnimation() {
 		animator.SetTrigger("Die");

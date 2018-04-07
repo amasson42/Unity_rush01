@@ -14,7 +14,6 @@ public class ItemInventory : MonoBehaviour {
 	public float attackSpeed;
 	
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame

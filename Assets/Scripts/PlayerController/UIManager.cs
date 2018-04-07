@@ -72,7 +72,19 @@ public class UIManager : MonoBehaviour {
 			highlightNode.SetActive(true);
 			enemyPanel.gameObject.SetActive(true);
 		} else {
-			highlightNode.SetActive(false);
+			/* ADD QHONORE */
+			Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			Physics.Raycast(cameraRay, out hit);
+			ItemEntity item = hit.collider.GetComponent<ItemEntity>();
+
+			if (item && item.gameObject.activeSelf) {
+				highlightNodeLight.color = Color.yellow;
+				highlightNode.transform.position = item.transform.position;
+				highlightNode.SetActive(true);
+			} else
+			/* END ADD QHONORE */
+				highlightNode.SetActive(false);
 			enemyPanel.gameObject.SetActive(false);
 		}
 	}
