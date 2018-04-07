@@ -10,7 +10,7 @@ public class Actor : MonoBehaviour {
 	public NavMeshAgent agent;
 	public Unit unit;
 	public List<SpellCaster> spells;
-
+	[HideInInspector] public Loot[] loots;
 	[HideInInspector] public Actor currentTarget = null;
 
  	void Start() {
@@ -20,6 +20,7 @@ public class Actor : MonoBehaviour {
 			agent = GetComponent<NavMeshAgent>();
 		if (unit == null)
 			unit = GetComponent<Unit>();
+		loots = GetComponents<Loot>();
 	}
 	
 	void Update() {
@@ -100,6 +101,8 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void RemoveFromGame(float deathTime) {
+		foreach(Loot loot in loots)
+			loot.generateLoot(unit.level);
 		Destroy(GetComponent<Collider>());
 		Destroy(agent);
 		Destroy(gameObject, deathTime);

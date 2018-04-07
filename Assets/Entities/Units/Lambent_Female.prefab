@@ -430,6 +430,8 @@ GameObject:
   - component: {fileID: 195914588553561768}
   - component: {fileID: 114202702328135830}
   - component: {fileID: 114973549273118652}
+  - component: {fileID: 114390983312565506}
+  - component: {fileID: 114451379624308364}
   m_Layer: 0
   m_Name: Lambent_Female
   m_TagString: unitEntity
@@ -1355,7 +1357,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1225555713466246}
-  m_LocalRotation: {x: -0.0000007283833, y: -0.6801655, z: 0.16693522, w: 0.71379805}
+  m_LocalRotation: {x: -0.0000007283832, y: -0.68016547, z: 0.1669352, w: 0.713798}
   m_LocalPosition: {x: 0.00027182, y: -0.00060679996, z: -0.00309769}
   m_LocalScale: {x: 0.99999154, y: 0.9999992, z: 0.9999923}
   m_Children:
@@ -2516,7 +2518,36 @@ MonoBehaviour:
   agent: {fileID: 195914588553561768}
   unit: {fileID: 114973549273118652}
   spells: []
+  loots: []
   currentTarget: {fileID: 0}
+--- !u!114 &114390983312565506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307421231969354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootChance: 10
+  loots:
+  - {fileID: 114701397673092620, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
+--- !u!114 &114451379624308364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307421231969354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootChance: 5
+  loots:
+  - {fileID: 114701397673092620, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
 --- !u!114 &114676235198211110
 MonoBehaviour:
   m_ObjectHideFlags: 1
