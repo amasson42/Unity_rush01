@@ -31,7 +31,7 @@ public class MenuEnemyInfo : MonoBehaviour {
 		{
 			Unit cible = cibleA.unit;
 			life.anchorMax = new Vector2((float)cible.currentHealth / (float)cible.maxHealth, 1f);
-			lifeTxt.text = "Life : " + cible.currentHealth + " / " + cible.maxHealth;
+			lifeTxt.text = "Life : " + Mathf.RoundToInt(cible.currentHealth) + " / " + Mathf.RoundToInt(cible.maxHealth);
 			txt.text = "Lvl " + cible.level;
 		}
 	}

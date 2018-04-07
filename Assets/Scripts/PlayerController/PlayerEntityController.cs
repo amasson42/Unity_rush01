@@ -15,7 +15,24 @@ public class PlayerEntityController : MonoBehaviour {
 	private Unit unit;
 	private float lastErrorText;
 
-	// Use this for initialization
+	static bool _rayOk = false;
+	static RaycastHit _hitOk;
+	public static RaycastHit GetClickedRaycast()
+	{
+		if (!_rayOk)
+		{
+			Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Physics.Raycast(cameraRay, out _hitOk);
+			_rayOk = true;
+		}
+		return _hitOk;
+	}
+	public static T GetClickedType<T>()
+	{
+		Collider col = GetClickedRaycast().collider;
+		return (col ? col.GetComponent<T>() : default(T));
+	}
+
 	void Start () {
 		actor = GetComponent<Actor>();
 		unit = GetComponent<Unit>();
@@ -24,27 +41,25 @@ public class PlayerEntityController : MonoBehaviour {
 		lastErrorText = Time.time;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (MenuManager.OnInterface())
 			return ;
 		if (Input.GetMouseButtonDown(0)) {
-			var hit = GetClickedRaycast();
-			Actor hitActor = hit.collider.GetComponent<Actor>();
-			if (hitActor && hitActor.unit && hitActor.unit.team != unit.team) {
+			RaycastHit hit = GetClickedRaycast();
+			Actor hitActor;
+			ItemEntity item;
+			if ((hitActor = hit.collider.GetComponent<Actor>()) && hitActor.unit && hitActor.unit.team != unit.team)
+			{
 				actor.OrderAttackTarget(hitActor);
-			} else {
-				/* ADD QHONORE */
-				ItemEntity item = hit.collider.GetComponent<ItemEntity>();
-
-				if (item) {
-					actor.OrderLootItem(item);
-				} else {
-				/* END ADD QHONORE */
-					actor.OrderMoveToTarget(hit.point);
-					moveMarkNode.transform.position = hit.point;
-					moveMarkNode.SetActive(true);
-				}
+			}
+			else if ((item = hit.collider.GetComponent<ItemEntity>())) 
+				actor.OrderLootItem(item);
+			}
+			else
+			{
+				actor.OrderMoveToTarget(hit.point);
+				moveMarkNode.transform.position = hit.point;
+				moveMarkNode.SetActive(true);
 			}
 		}
 		if (Input.GetMouseButtonUp(0)) {
@@ -81,11 +96,9 @@ public class PlayerEntityController : MonoBehaviour {
 			errorActionText.text = "";
 	}
 
-	RaycastHit GetClickedRaycast() {
-		Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		Physics.Raycast(cameraRay, out hit);
-		return hit;
+	void LateUpdate()
+	{
+		_rayOk = false;
 	}
 
 	void PutErrorText(string text) {
