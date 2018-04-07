@@ -13,7 +13,6 @@ public class PlayerEntityController : MonoBehaviour {
 
 	private Actor actor;
 	private Unit unit;
-	[HideInInspector] public bool takeMouseEvent = true;
 	private float lastErrorText;
 
 	// Use this for initialization
@@ -27,7 +26,9 @@ public class PlayerEntityController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (takeMouseEvent && Input.GetMouseButtonDown(0)) {
+		if (MenuManager.OnInterface())
+			return ;
+		if (Input.GetMouseButtonDown(0)) {
 			var hit = GetClickedRaycast();
 			Actor hitActor = hit.collider.GetComponent<Actor>();
 			if (hitActor && hitActor.unit && hitActor.unit.team != unit.team) {
@@ -38,7 +39,7 @@ public class PlayerEntityController : MonoBehaviour {
 				moveMarkNode.SetActive(true);
 			}
 		}
-		if (takeMouseEvent && Input.GetMouseButtonUp(0)) {
+		if (Input.GetMouseButtonUp(0)) {
 			if (actor.currentTarget)
 				actor.OrderAttackTarget(null);
 		}

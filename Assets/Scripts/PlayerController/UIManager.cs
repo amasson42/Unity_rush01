@@ -116,7 +116,6 @@ public class UIManager : MonoBehaviour {
 	void CloseStatPanel() {
 		if (unit.availableStatsPoints <= 0) {
 			statsPanel.gameObject.SetActive(false);
-			playerEntityController.takeMouseEvent = true;
 		}
 	}
 }
