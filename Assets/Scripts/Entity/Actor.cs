@@ -14,6 +14,7 @@ public class Actor : MonoBehaviour {
 	[HideInInspector] public Actor currentTarget = null;
 	[HideInInspector] public ItemEntity currentTargetItem = null;
 	[HideInInspector] public List<ItemInventory> items;
+	public bool inventoryChanged = false;
 	public ItemInventory weaponSlot = null;
 	public int inventoryCapacity = 12;
 	public bool moveRetained {get {return moveRetainer > 0;}}
@@ -161,6 +162,7 @@ public class Actor : MonoBehaviour {
 		{
 			items.Add(item);
 			item.entityInstance.gameObject.SetActive(false);
+			inventoryChanged = true;
 		}
 		else
 			item.entityInstance.transform.position = new Vector3(item.entityInstance.transform.position.x, item.entityInstance.transform.position.y + 0.5f, item.entityInstance.transform.position.z);
@@ -177,10 +179,12 @@ public class Actor : MonoBehaviour {
 			weapon.entityInstance.transform.parent = weaponTransformSlot;
 			weapon.entityInstance.transform.localPosition = Vector3.zero;
 			weapon.entityInstance.transform.localEulerAngles = Vector3.zero;
+
 			//Add Stats to Unit
 			unit.weaponAttackMin = weaponSlot.minDamage;
 			unit.weaponAttackMax = weaponSlot.maxDamage;
 			unit.weaponAttackPeriod = weaponSlot.attackSpeed;
+			inventoryChanged = true;
 		}
 		else if (items.Count < inventoryCapacity)
 			AddInInventory(weapon);
@@ -203,6 +207,7 @@ public class Actor : MonoBehaviour {
 		}
 		if (toWeaponSlot)
 			AddWeapon(item);
+		inventoryChanged = true;
 	}
 
 	public void RemoveWeapon(bool toInventory = false, bool hasLimits = true)
@@ -215,6 +220,7 @@ public class Actor : MonoBehaviour {
 		weaponSlot.entityInstance.transform.position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));
 		weaponSlot.entityInstance.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
 		weaponSlot = null;
+		inventoryChanged = true;
 	}
 
 	public void RemoveFromGame(float deathTime) {
