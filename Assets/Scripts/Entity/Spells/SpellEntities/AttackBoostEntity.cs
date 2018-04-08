@@ -13,6 +13,8 @@ public class AttackBoostEntity : SpellEntity {
 	
 	// Update is called once per frame
 	void Update () {
+		if (caster == null)
+			Destroy(this);
 		transform.position = caster.transform.position;
 		duration -= Time.deltaTime;
 		if (duration <= 0.0f) {

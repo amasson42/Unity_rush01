@@ -13,7 +13,7 @@ public class MenuPlayerInventory : MonoBehaviour {
 
 	private MenuInterface menu;
 	private Text description;
-	// public static MenuInventoryCase[] list;
+	private Image border;
 	public List<MenuInventoryCase> list = new List<MenuInventoryCase>();
 	public MenuInventoryCase equip;
 
@@ -21,16 +21,25 @@ public class MenuPlayerInventory : MonoBehaviour {
 		instance = this;
 	}
 
+
+
 	void Start ()
 	{
 		menu = GetComponent<MenuInterface>();
 		description = transform.Find("Menu/TabDescription/Text").GetComponent<Text>();
+		border = transform.Find("Menu/TabDescription/Border").GetComponent<Image>();
 		for (int i = 0; i < list.Count; ++i)
 		{
 			list[i].caseId = i;
 			list[i].inv = this;
+			MenuHoverEvent hove = list[i].gameObject.AddComponent<MenuHoverEvent>();
+			hove.OnHoverEnterEvent += OnHoverEnter;
+			hove.OnHoverExitEvent += OnHoverExit;
 		}
 		equip.inv = this;
+		MenuHoverEvent hover = equip.gameObject.AddComponent<MenuHoverEvent>();
+		hover.OnHoverEnterEvent += OnHoverEnter;
+		hover.OnHoverExitEvent += OnHoverExit;
 	}
 	
 	void UpdateInv()
@@ -54,6 +63,34 @@ public class MenuPlayerInventory : MonoBehaviour {
 			UpdateInv();
 			player.inventoryChanged = false;
 		}
-		description.text = "test";
+	}
+
+	void SetDescription(ItemInventory ca)
+	{
+		if (!ca)
+		{
+			description.text = "";
+			border.enabled = false;
+		}
+		else
+		{
+			description.text = "<size=20>" + ca.weaponName + "</size>" +
+				"\nLevel : " + ca.level +
+				"\nDamage : " + (long)ca.minDamage + "-" + (long)ca.maxDamage +
+				"\nAttackSpeed : " + ca.attackSpeed +
+				"\nDps : " + (long)((ca.minDamage + ca.maxDamage) / ca.attackSpeed * 0.5f);
+			border.color = ItemInventory.RarityColors[(int)ca.rarity];
+			border.enabled = true;
+		}
+	}
+
+	void OnHoverEnter(GameObject obj)
+	{
+		MenuInventoryCase sp = obj.GetComponent<MenuInventoryCase>();
+		SetDescription(sp ? sp.item : null);
+	}
+	void OnHoverExit(GameObject obj)
+	{
+		SetDescription(null);
 	}
 }
