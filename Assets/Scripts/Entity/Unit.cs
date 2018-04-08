@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour {
 
 	// Fight
 	public float currentDamage {get {return weaponAttackDamage * (1.0f + (float)strength * 0.05f);}} // current damage with bonus
+	public float currentSpellDamages {get {return 1.0f + energy * 0.01f;}} // multiply spell damages
 	public float currentWeaponPeriod {get {
 		return weaponAttackPeriod * (1.0f / (1.0f + 0.01f * (float)dexterity)); // current cooldown with bonus
 	}}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ElecVortex : SpellEntity {
 
+	Vector3 orbScaler;
 	float delay = 1.0f;
 	bool delayPassed = false;
 	bool dead = false;
@@ -16,6 +17,8 @@ public class ElecVortex : SpellEntity {
 		caster.animator.SetTrigger("WeaponRaise");
 		caster.OrderStopMove();
 		transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+		float scaler = 1.0f + skillLevel * 0.2f;
+		orbScaler = new Vector3(scaler, scaler, scaler);
 		grabeds = new List<Actor>();
 	}
 	
@@ -30,12 +33,12 @@ public class ElecVortex : SpellEntity {
 			}
 		} else if (!dead) {
 			transform.position = Vector3.MoveTowards(transform.position, pointTarget, 8.0f * Time.deltaTime);
-			transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(1, 1, 1), 8.0f * Time.deltaTime);
+			transform.localScale = Vector3.MoveTowards(transform.localScale, orbScaler, 8.0f * Time.deltaTime);
 			foreach (var grab in grabeds) {
 				if (grab) {
 					grab.transform.position = Vector3.MoveTowards(grab.transform.position, pointTarget, 2.0f * Time.deltaTime);
 					if (grab.unit && grab.unit.isAlive)
-						grab.unit.TakeDamages(30.0f * Time.deltaTime, caster.unit);
+						grab.unit.TakeDamages(30.0f * Time.deltaTime * caster.unit.currentSpellDamages, caster.unit);
 				}
 			}
 			if (delay <= 0.0f)

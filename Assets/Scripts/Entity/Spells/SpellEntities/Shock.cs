@@ -49,7 +49,7 @@ public class Shock : SpellEntity {
 	void ApplyEffect(Actor target) {
 		if (target.unit) {
 			if ((caster.unit && target.unit.team != caster.unit.team) || caster.unit == null)
-					target.unit.TakeDamages(skillLevel * 25.0f, caster.unit);
+				target.unit.TakeDamages(caster.unit.currentSpellDamages * skillLevel * 25.0f, caster.unit);
 		}
 	}
 
