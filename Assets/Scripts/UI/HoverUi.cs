@@ -54,7 +54,10 @@ public class HoverUi : MonoBehaviour
 	void ShowItemInfo(ItemEntity item)
 	{
 		if (item == null)
+		{
+			canvas.enabled = false;
 			return ;
+		}
 		Vector3 pos = Camera.main.WorldToScreenPoint(item.transform.position);
 		pos.z = 0;
 		// float x = rect.rect.width * 0.5f;
