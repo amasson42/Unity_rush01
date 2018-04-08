@@ -16,7 +16,7 @@ public class HoverUi : MonoBehaviour
 	[SerializeField]
 	private GameObject highlightNodePrefab;
 	private GameObject highlightNode;
-	private Light highlightNodeLight;
+	// private Light highlightNodeLight;
 
 
 	void Awake()
@@ -29,7 +29,7 @@ public class HoverUi : MonoBehaviour
 	void Start()
 	{
 		highlightNode = Instantiate(highlightNodePrefab, Vector3.zero, Quaternion.identity);
-		highlightNodeLight = highlightNode.GetComponentInChildren<Light>();
+		// highlightNodeLight = highlightNode.GetComponentInChildren<Light>();
 	}
 	void Update()
 	{
@@ -38,6 +38,8 @@ public class HoverUi : MonoBehaviour
 			!MenuManager.OnInterface())
 		{
 			hover = hit.collider.GetComponent<Actor>();
+			if (hover)
+				canvas.enabled = false;
 			ShowItemInfo(hit.collider.GetComponent<ItemEntity>());
 			highlightNode.transform.position = hit.transform.position;
 			highlightNode.SetActive(true);
@@ -55,7 +57,7 @@ public class HoverUi : MonoBehaviour
 			return ;
 		Vector3 pos = Camera.main.WorldToScreenPoint(item.transform.position);
 		pos.z = 0;
-		float x = rect.rect.width * 0.5f;
+		// float x = rect.rect.width * 0.5f;
 		float y = rect.rect.height * 0.5f;
 		pos.y += y + 20;
 		canvas.enabled = true;

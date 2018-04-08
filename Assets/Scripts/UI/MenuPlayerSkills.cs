@@ -9,6 +9,9 @@ public class MenuPlayerSkills : MonoBehaviour {
 
 	public Actor player;
 
+	[SerializeField]
+	private MenuSpellCase menuSpellCasePrefab;
+
 	private MenuInterface menu;
 	private Text txtDescription;
 	private Text txtSpell;

@@ -78,6 +78,7 @@ public class PlayerEntityController : MonoBehaviour {
 		}
 		followCamera.horizontalAngle += Input.GetAxis("Vertical");
 		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
+		/*
 		if (Input.GetKeyDown(KeyCode.Q)) {
 			string error;
 			if (!actor.OrderUseSpell(0, hit.point, hit.collider.GetComponent<Actor>(), out error))
@@ -97,7 +98,7 @@ public class PlayerEntityController : MonoBehaviour {
 			string error;
 			if (!actor.OrderUseSpell(3, hit.point, hit.collider.GetComponent<Actor>(), out error))
 				PutErrorText(error);
-		}
+		}*/
 		if (Time.time - lastErrorText > 3.0f)
 			errorActionText.text = "";
 	}

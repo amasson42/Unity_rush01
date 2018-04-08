@@ -2580,6 +2580,9 @@ MonoBehaviour:
   manaCost: 1
   cooldown: 3
   currentCooldown: 0
+  name: Dash
+  info: 
+  icon: {fileID: 0}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
   spellEntityPrefab: {fileID: 114849736488151712, guid: 99f2388a6137943918127692608ba7d7,
@@ -2599,6 +2602,9 @@ MonoBehaviour:
   manaCost: 5
   cooldown: 3
   currentCooldown: 0
+  name: Shock
+  info: 
+  icon: {fileID: 0}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
   spellEntityPrefab: {fileID: 114436114027584866, guid: afab085b8a47b4dc9bc8f961f34ea6fa,
@@ -2618,6 +2624,9 @@ MonoBehaviour:
   manaCost: 3
   cooldown: 1
   currentCooldown: 0
+  name: Slash
+  info: 
+  icon: {fileID: 0}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
   spellEntityPrefab: {fileID: 114790395400804870, guid: 54ebe04f46283472192508669c708200,
@@ -2636,7 +2645,6 @@ MonoBehaviour:
   followCamera: {fileID: 0}
   errorActionText: {fileID: 0}
   moveMarkNode: {fileID: 0}
-  takeMouseEvent: 1
 --- !u!114 &114210099961771680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2691,6 +2699,8 @@ MonoBehaviour:
   - {fileID: 114111057027614546}
   loots: []
   currentTarget: {fileID: 0}
+  currentTargetItem: {fileID: 0}
+  items: []
 --- !u!137 &137032090602870992
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

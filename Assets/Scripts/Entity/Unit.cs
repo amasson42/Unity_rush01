@@ -9,18 +9,19 @@ public class Unit : MonoBehaviour {
 
 	// Hero stats
 	public int level = 1; // current level
-	public int currentExperience = 0;
-	public static readonly int baseRequiredExperience = 30;
-	public static int RequiredExperienceAtLevel(int level) {
+	public long currentExperience = 0;
+	public static readonly long baseRequiredExperience = 30;
+	public static long RequiredExperienceAtLevel(int level) {
 		/* ADD QHONORE */
-		return ((int)(baseRequiredExperience * Mathf.Pow(1.25f, level - 1)));
+		// return ((long)(baseRequiredExperience * Mathf.Pow(1.25f, level - 1)));
+		return ((long)(baseRequiredExperience * level));
 		/* END ADD QHONORE */
 		// if (level < 2)
 		// 	return 10 * level + 20;
 		// return RequiredExperienceAtLevel(level - 2) + RequiredExperienceAtLevel(level - 1);
 	}
-	[HideInInspector] public int requiredExperience; // the remaining experience we want to level up
-	public int experienceValue {get {return level * 5;}} // the experience collected when killed
+	[HideInInspector] public long requiredExperience; // the remaining experience we want to level up
+	public long experienceValue {get {return level * 5;}} // the experience collected when killed
 	public int strength = 1; // increase melee damages by 5%
 	public int dexterity = 1; // increase ranged damages by 5% and attack speed by 1% and multiply chances to miss by 0.99;
 	public int vitality = 1; // increase life by 5
@@ -110,7 +111,7 @@ public class Unit : MonoBehaviour {
 		requiredExperience = RequiredExperienceAtLevel(level);
 	}
 
-	public void GainExperiencePoints(int amount) {
+	public void GainExperiencePoints(long amount) {
 		currentExperience += amount;
 		CheckExperience();
 	}
