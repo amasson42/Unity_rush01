@@ -2633,7 +2633,7 @@ MonoBehaviour:
   currentTargetItem: {fileID: 0}
   items: []
   weaponSlot: {fileID: 0}
-  inventoryCapacity: 12
+  inventoryCapacity: 15
 --- !u!114 &114791818147929446
 MonoBehaviour:
   m_ObjectHideFlags: 1
