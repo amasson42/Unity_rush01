@@ -30,6 +30,10 @@ public class Actor : MonoBehaviour {
 	}
 	
 	void Update() {
+		if (Input.GetKeyDown(KeyCode.K) && items.Count > 0)//TEST DEBUG
+			SwapInventoryToWeaponSlot(items[0]);//TEST DEBUG
+		if (Input.GetKeyDown(KeyCode.L) && items.Count > 0)//TEST DEBUG
+			RemoveFromInventory(items[0]);//TEST DEBUG
 		if (agent == null)
 			return ;
 		if (unit && unit.isAlive && !moveRetained) {
@@ -40,19 +44,11 @@ public class Actor : MonoBehaviour {
 			} else {
 				currentTarget = null;
 			}
-			if (currentTargetItem && pathComplete()) {
-				if (weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
-				{
-					removeWeapon(false);
-					addWeapon(currentTargetItem.itemInstance);
-				}
-				else if (!weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
-					addWeapon(currentTargetItem.itemInstance);
-				else if (items.Count < inventoryCapacity)
-				{
-					items.Add(currentTargetItem.itemInstance);
-					currentTargetItem.gameObject.SetActive(false);
-				}
+			if (currentTargetItem && PathComplete()) {
+				if (currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
+					AddWeapon(currentTargetItem.itemInstance);
+				else
+					AddInInventory(currentTargetItem.itemInstance);
 				currentTargetItem = null;
 			}
 		}
@@ -150,7 +146,7 @@ public class Actor : MonoBehaviour {
 		currentTarget = null;
 	}
 
-	public bool pathComplete()
+	public bool PathComplete()
     {
 		return (agent.remainingDistance == 0 && agent.pathStatus == NavMeshPathStatus.PathComplete);
     }
@@ -159,21 +155,60 @@ public class Actor : MonoBehaviour {
 		animator.SetTrigger("Die");
 	}
 
-	public void addWeapon(ItemInventory weapon)
+	public void AddInInventory(ItemInventory item, bool hasLimits = true)
 	{
-		weaponSlot = weapon;
-		weapon.entityInstance.gameObject.SetActive(true);
-		weapon.entityInstance.GetComponent<Rigidbody>().isKinematic = true;
-		weapon.entityInstance.GetComponent<BoxCollider>().enabled = false;
-		weapon.entityInstance.transform.parent = weaponTransformSlot;
-		weapon.entityInstance.transform.localPosition = Vector3.zero;
-		weapon.entityInstance.transform.localEulerAngles = Vector3.zero;
+		if (!hasLimits || items.Count < inventoryCapacity)
+		{
+			items.Add(item);
+			item.entityInstance.gameObject.SetActive(false);
+		}
+		else
+			item.entityInstance.transform.position = new Vector3(item.entityInstance.transform.position.x, item.entityInstance.transform.position.y + 0.5f, item.entityInstance.transform.position.z);
+	}					
+
+	public void AddWeapon(ItemInventory weapon)
+	{
+		if (!weaponSlot && weapon.type == ItemInventory.Type.Weapon)
+		{
+			weaponSlot = weapon;
+			weapon.entityInstance.gameObject.SetActive(true);
+			weapon.entityInstance.GetComponent<Rigidbody>().isKinematic = true;
+			weapon.entityInstance.GetComponent<BoxCollider>().enabled = false;
+			weapon.entityInstance.transform.parent = weaponTransformSlot;
+			weapon.entityInstance.transform.localPosition = Vector3.zero;
+			weapon.entityInstance.transform.localEulerAngles = Vector3.zero;
+			//Add Stats to Unit
+			unit.weaponAttackMin = weaponSlot.minDamage;
+			unit.weaponAttackMax = weaponSlot.maxDamage;
+			unit.weaponAttackPeriod = weaponSlot.attackSpeed;
+		}
+		else if (items.Count < inventoryCapacity)
+			AddInInventory(weapon);
+		else if (weapon.entityInstance.gameObject.activeSelf)
+			weapon.entityInstance.transform.position = new Vector3(weapon.entityInstance.transform.position.x, weapon.entityInstance.transform.position.y + 0.5f, weapon.entityInstance.transform.position.z);
 	}
 
-	public void removeWeapon(bool toInventory)
+	public void SwapInventoryToWeaponSlot(ItemInventory item)
+	{
+		RemoveWeapon(true, false);
+		RemoveFromInventory(item, true);
+	}
+
+	public void RemoveFromInventory(ItemInventory item, bool toWeaponSlot = false)
+	{
+		if (items.Remove(item))
+		{
+			item.entityInstance.gameObject.SetActive(true);
+			item.entityInstance.transform.position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));
+		}
+		if (toWeaponSlot)
+			AddWeapon(item);
+	}
+
+	public void RemoveWeapon(bool toInventory = false, bool hasLimits = true)
 	{
 		if (toInventory)
-			weaponSlot.entityInstance.gameObject.SetActive(false);
+			AddInInventory(weaponSlot, hasLimits);
 		weaponTransformSlot.DetachChildren();
 		weaponSlot.entityInstance.GetComponent<Rigidbody>().isKinematic = false;
 		weaponSlot.entityInstance.GetComponent<BoxCollider>().enabled = true;

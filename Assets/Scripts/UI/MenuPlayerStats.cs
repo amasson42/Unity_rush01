@@ -61,9 +61,10 @@ public class MenuPlayerStats : MonoBehaviour {
 			player.energy + "\n\n" + 
 			"nan" + "\n\n" +  //armor
 			player.availableStatsPoints + "\n\n\n\n" + 
-			player.currentDamage + "\n\n" + 
-			// player._damagePhysMin + "-" + player._damagePhysMax + "\n\n" + 
+			// player.currentDamage + "\n\n" + 
+			(long)player.weaponAttackMin + "-" + (long)player.weaponAttackMax + "\n\n" + 
 			player.currentWeaponPeriod + "\n\n" + 
+			(long)((player.weaponAttackMin + player.weaponAttackMax) / player.currentWeaponPeriod * 0.5f) + "\n\n" + 
 			player.maxHealth + "\n\n" + 
 			player.currentExperience + "\n\n" + 
 			player.requiredExperience;
