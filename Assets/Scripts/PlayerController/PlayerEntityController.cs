@@ -41,53 +41,59 @@ public class PlayerEntityController : MonoBehaviour {
 		lastErrorText = Time.time;
 	}
 	
+	private bool onMove = false;
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.Z))//TODO for debug
+			unit.LevelUp();
 		if (MenuManager.OnInterface())
 			return ;
-		if (Input.GetMouseButtonDown(0)) {
-			RaycastHit hit = GetClickedRaycast();
+		RaycastHit hit = GetClickedRaycast();
+		if (Input.GetMouseButton(0))
+		{
 			Actor hitActor;
 			ItemEntity item;
 			if ((hitActor = hit.collider.GetComponent<Actor>()) && hitActor.unit && hitActor.unit.team != unit.team)
 			{
 				actor.OrderAttackTarget(hitActor);
+				moveMarkNode.SetActive(false);
 			}
-			else if ((item = hit.collider.GetComponent<ItemEntity>())) 
+			else if (Input.GetMouseButtonDown(0) && (item = hit.collider.GetComponent<ItemEntity>()))
+			{
 				actor.OrderLootItem(item);
+				moveMarkNode.SetActive(false);
 			}
-			else
+			else if (onMove || Input.GetMouseButtonDown(0))
 			{
 				actor.OrderMoveToTarget(hit.point);
 				moveMarkNode.transform.position = hit.point;
 				moveMarkNode.SetActive(true);
+				onMove = true;
 			}
 		}
-		if (Input.GetMouseButtonUp(0)) {
+		else if (Input.GetMouseButtonUp(0))
+		{
 			if (actor.currentTarget)
 				actor.OrderAttackTarget(null);
+			onMove = false;
 		}
 		followCamera.horizontalAngle += Input.GetAxis("Vertical");
 		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
 		if (Input.GetKeyDown(KeyCode.Q)) {
-			var hit = GetClickedRaycast();
 			string error;
 			if (!actor.OrderUseSpell(0, hit.point, hit.collider.GetComponent<Actor>(), out error))
 				PutErrorText(error);
 		}
 		if (Input.GetKeyDown(KeyCode.W)) {
-			var hit = GetClickedRaycast();
 			string error;
 			if (!actor.OrderUseSpell(1, hit.point, hit.collider.GetComponent<Actor>(), out error))
 				PutErrorText(error);
 		}
 		if (Input.GetKeyDown(KeyCode.E)) {
-			var hit = GetClickedRaycast();
 			string error;
 			if (!actor.OrderUseSpell(2, hit.point, hit.collider.GetComponent<Actor>(), out error))
 				PutErrorText(error);
 		}
 		if (Input.GetKeyDown(KeyCode.R)) {
-			var hit = GetClickedRaycast();
 			string error;
 			if (!actor.OrderUseSpell(3, hit.point, hit.collider.GetComponent<Actor>(), out error))
 				PutErrorText(error);

@@ -11,8 +11,6 @@ public class MenuPlayerStats : MonoBehaviour {
 
 	private MenuInterface menu;
 	private Text txt;
-	private bool show = false;
-
 
 	public void ButtonUpStrength()
 	{

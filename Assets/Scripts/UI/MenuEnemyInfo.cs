@@ -23,9 +23,9 @@ public class MenuEnemyInfo : MonoBehaviour {
 	
 	void Update ()
 	{
-		if (!player)
-			return ;
-		Actor cibleA = player.currentTarget;
+		Actor cibleA = HoverUi.hover;
+		if (player && !cibleA)
+			cibleA = player.currentTarget;
 		menu.SetActive(cibleA != null);
 		if (cibleA)
 		{
