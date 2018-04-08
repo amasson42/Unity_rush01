@@ -62,7 +62,7 @@ public class HoverUi : MonoBehaviour
 		pos.y += y + 20;
 		canvas.enabled = true;
 		rect.position = pos;
-		border.color = Loot.RarityColors[(int)item.itemInstance.rarity];
+		border.color = ItemInventory.RarityColors[(int)item.itemInstance.rarity];
 		ItemInventory inv = item.itemInstance;
 		if (inv)
 		{
