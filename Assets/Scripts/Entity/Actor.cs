@@ -6,18 +6,16 @@ using UnityEngine.AI;
 public class Actor : MonoBehaviour {
 
 	public Animator animator;
-	public Transform weaponTransformSlot;
+	public Transform weaponTransformSlot = null;
 	public NavMeshAgent agent;
 	public Unit unit;
 	public List<SpellCaster> spells;
 	[HideInInspector] public Loot[] loots;
 	[HideInInspector] public Actor currentTarget = null;
-
-	/* ADD QHONORE */
 	[HideInInspector] public ItemEntity currentTargetItem = null;
-
 	[HideInInspector] public List<ItemInventory> items;
-	/* END ADD QHONORE */
+	public ItemInventory weaponSlot = null;
+	public int inventoryCapacity = 12;
 
  	void Start() {
 		if (animator == null)
@@ -39,13 +37,21 @@ public class Actor : MonoBehaviour {
 				} else {
 					currentTarget = null;
 				}
-				/* ADD QHONORE */
 				if (currentTargetItem && pathComplete()) {
-					items.Add(currentTargetItem.itemInstance);
-					currentTargetItem.gameObject.SetActive(false);
+					if (weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
+					{
+						removeWeapon(false);
+						addWeapon(currentTargetItem.itemInstance);
+					}
+					else if (!weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
+						addWeapon(currentTargetItem.itemInstance);
+					else if (items.Count < inventoryCapacity)
+					{
+						items.Add(currentTargetItem.itemInstance);
+						currentTargetItem.gameObject.SetActive(false);
+					}
 					currentTargetItem = null;
 				}
-				/* END ADD QHONORE */
 			}
 			animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
 		}
@@ -86,14 +92,14 @@ public class Actor : MonoBehaviour {
 			agent.stoppingDistance = 0.0f;
 		}
 		currentTarget = null;
-		currentTargetItem = null;/* ADD QHONORE */
+		currentTargetItem = null;
 	}
 
 	public void OrderAttackTarget(Actor target) {
 		if (unit && !unit.isAlive)
 			return ;
 		currentTarget = target;
-		currentTargetItem = null;/* ADD QHONORE */
+		currentTargetItem = null;
 	}
 
 	public bool OrderUseSpell(int spellIndex, Vector3 targetPoint, Actor targetActor, out string error) {
@@ -111,7 +117,6 @@ public class Actor : MonoBehaviour {
 		return sc.TryCast(out error);
 	}
 
-	/* ADD QHONORE */
 	public void OrderLootItem(ItemEntity item) {
 		if (unit && !unit.isAlive)
 			return ;
@@ -127,10 +132,32 @@ public class Actor : MonoBehaviour {
     {
 		return (agent.remainingDistance == 0 && agent.pathStatus == NavMeshPathStatus.PathComplete);
     }
-	/* END ADD QHONORE */
 
 	public void PlayDeadAnimation() {
 		animator.SetTrigger("Die");
+	}
+
+	public void addWeapon(ItemInventory weapon)
+	{
+		weaponSlot = weapon;
+		weapon.entityInstance.gameObject.SetActive(true);
+		weapon.entityInstance.GetComponent<Rigidbody>().isKinematic = true;
+		weapon.entityInstance.GetComponent<BoxCollider>().enabled = false;
+		weapon.entityInstance.transform.parent = weaponTransformSlot;
+		weapon.entityInstance.transform.localPosition = Vector3.zero;
+		weapon.entityInstance.transform.localEulerAngles = Vector3.zero;
+	}
+
+	public void removeWeapon(bool toInventory)
+	{
+		if (toInventory)
+			weaponSlot.entityInstance.gameObject.SetActive(false);
+		weaponTransformSlot.DetachChildren();
+		weaponSlot.entityInstance.GetComponent<Rigidbody>().isKinematic = false;
+		weaponSlot.entityInstance.GetComponent<BoxCollider>().enabled = true;
+		weaponSlot.entityInstance.transform.position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));
+		weaponSlot.entityInstance.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
+		weaponSlot = null;
 	}
 
 	public void RemoveFromGame(float deathTime) {
