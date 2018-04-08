@@ -44,7 +44,15 @@ public class PlayerEntityController : MonoBehaviour {
 	private bool onMove = false;
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Z))//TODO for debug
-			unit.LevelUp();
+		{
+			if (Input.GetKey(KeyCode.LeftShift))
+			{
+				for (int i = 0; i < 10; ++i)
+					unit.LevelUp();
+			}
+			else
+				unit.LevelUp();
+		}
 		if (MenuManager.OnInterface())
 			return ;
 		RaycastHit hit = GetClickedRaycast();

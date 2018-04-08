@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour {
 	public static long RequiredExperienceAtLevel(int level) {
 		/* ADD QHONORE */
 		// return ((long)(baseRequiredExperience * Mathf.Pow(1.25f, level - 1)));
-		return ((long)(baseRequiredExperience * level));
+		return ((long)(baseRequiredExperience * level * level));
 		/* END ADD QHONORE */
 		// if (level < 2)
 		// 	return 10 * level + 20;
