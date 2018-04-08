@@ -252,6 +252,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae9bc0bc8ea3346ffbba101340f39e2e, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &36672152 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4675589955237054, guid: d045c43f3fc4a48268d25259f7bc971f,
+    type: 2}
+  m_PrefabInternal: {fileID: 338343466}
 --- !u!1 &39357030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1156,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1979361333915138, guid: 8f597d701ec85445e9caeafb7546ff1d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f597d701ec85445e9caeafb7546ff1d, type: 2}
   m_IsPrefabParent: 0
@@ -1729,6 +1738,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1602185959}
     m_Modifications:
+    - target: {fileID: 114756536379116060, guid: d045c43f3fc4a48268d25259f7bc971f,
+        type: 2}
+      propertyPath: spells.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4552970137253634, guid: d045c43f3fc4a48268d25259f7bc971f, type: 2}
       propertyPath: m_LocalPosition.x
       value: -71.17138
@@ -1776,6 +1790,21 @@ Prefab:
       propertyPath: moveMarkNode
       value: 
       objectReference: {fileID: 1638277241}
+    - target: {fileID: 114756536379116060, guid: d045c43f3fc4a48268d25259f7bc971f,
+        type: 2}
+      propertyPath: spells.Array.data[3]
+      value: 
+      objectReference: {fileID: 1706942489}
+    - target: {fileID: 114123698205338106, guid: d045c43f3fc4a48268d25259f7bc971f,
+        type: 2}
+      propertyPath: info
+      value: Throw a fireball in the cursor direction
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129706850129986, guid: d045c43f3fc4a48268d25259f7bc971f,
+        type: 2}
+      propertyPath: info
+      value: Turn around to hit every near ennemies
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d045c43f3fc4a48268d25259f7bc971f, type: 2}
   m_IsPrefabParent: 0
@@ -3383,6 +3412,56 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 621911404}
+--- !u!1 &632839914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 632839915}
+  - component: {fileID: 632839916}
+  m_Layer: 0
+  m_Name: ElecVortex
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632839915
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632839914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 36672152}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &632839916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632839914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee06ca6158ab4bcaa71e83c58ea5404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 400039942}
+  manaCost: 5
+  cooldown: 1
+  currentCooldown: 0
+  name: ElecVortex
+  info: 
+  icon: {fileID: 21300000, guid: df5153fca31c9bf47b2d36359b5dd373, type: 3}
+  actorTarget: {fileID: 0}
+  pointTarget: {x: 0, y: 0, z: 0}
+  spellEntityPrefab: {fileID: 0}
 --- !u!1 &637753517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,12 +5188,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007854369}
---- !u!114 &1028615482 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114147080888347466, guid: d045c43f3fc4a48268d25259f7bc971f,
-    type: 2}
-  m_PrefabInternal: {fileID: 338343466}
-  m_Script: {fileID: 11500000, guid: 980153eda26d14cfa95c6ca747559169, type: 3}
 --- !u!1 &1031338743
 GameObject:
   m_ObjectHideFlags: 0
@@ -5595,27 +5668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc7f815753b4c29807549e792dc5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEntityController: {fileID: 1028615482}
-  highlightNode: {fileID: 0}
-  highlightNodeLight: {fileID: 0}
-  unit: {fileID: 1770511178}
-  lifeBarMask: {fileID: 268471260}
-  lifeText: {fileID: 656888399}
-  manaBarMask: {fileID: 1042965094}
-  manaText: {fileID: 725334237}
-  levelText: {fileID: 663170266}
-  experienceBarMask: {fileID: 601099477}
-  showStatsButton: {fileID: 1228848496}
-  statsPanel: {fileID: 476361434}
-  strengthText: {fileID: 483915820}
-  dexterityText: {fileID: 467892740}
-  vitalityText: {fileID: 1549666449}
-  energyText: {fileID: 1341511247}
-  pointsText: {fileID: 1606396954}
-  enemyPanel: {fileID: 1651594707}
-  enemyNameText: {fileID: 502428681}
-  enemyLifeBarMask: {fileID: 1508480836}
-  enemyLifeText: {fileID: 741651297}
 --- !u!1 &1121168495
 GameObject:
   m_ObjectHideFlags: 0

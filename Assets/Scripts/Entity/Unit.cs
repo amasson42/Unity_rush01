@@ -41,7 +41,9 @@ public class Unit : MonoBehaviour {
 	public float maxMana {get {return baseMana + energy * 3;}} // computed max mana from base with bonus
 
 	// Weapon
-	public float weaponAttackDamage; // base weapon attack damages
+	public float weaponAttackMin; // base weapon attack damages
+	public float weaponAttackMax; // base weapon attack damages
+	public float weaponAttackDamage {get {return Random.Range(weaponAttackMin, weaponAttackMax + 1);}}
 	public float weaponAttackPeriod; // base weapon cooldown
 	public float weaponAttackRange; // base weapon range
 	public int weaponAttackAnimation; // weapon attack animation number ("Attack#")

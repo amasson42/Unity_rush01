@@ -16,8 +16,10 @@ public class Actor : MonoBehaviour {
 	[HideInInspector] public List<ItemInventory> items;
 	public ItemInventory weaponSlot = null;
 	public int inventoryCapacity = 12;
+	public bool moveRetained {get {return moveRetainer > 0;}}
+	private int moveRetainer = 0;
 
- 	void Start() {
+	void Start() {
 		if (animator == null)
 			animator = GetComponent<Animator>();
 		if (agent == null)
@@ -28,36 +30,50 @@ public class Actor : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (agent) {
-			if (unit && unit.isAlive) {
-				if (currentTarget && currentTarget.unit && currentTarget.unit.isAlive) {
-					agent.SetDestination(currentTarget.transform.position);
-					agent.stoppingDistance = agent.radius + unit.weaponAttackRange + currentTarget.agent.radius;
-					TryAttackTarget();
-				} else {
-					currentTarget = null;
-				}
-				if (currentTargetItem && pathComplete()) {
-					if (weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
-					{
-						removeWeapon(false);
-						addWeapon(currentTargetItem.itemInstance);
-					}
-					else if (!weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
-						addWeapon(currentTargetItem.itemInstance);
-					else if (items.Count < inventoryCapacity)
-					{
-						items.Add(currentTargetItem.itemInstance);
-						currentTargetItem.gameObject.SetActive(false);
-					}
-					currentTargetItem = null;
-				}
+		if (agent == null)
+			return ;
+		if (unit && unit.isAlive && !moveRetained) {
+			if (currentTarget && currentTarget.unit && currentTarget.unit.isAlive) {
+				agent.SetDestination(currentTarget.transform.position);
+				agent.stoppingDistance = agent.radius + unit.weaponAttackRange + currentTarget.agent.radius;
+				TryAttackTarget();
+			} else {
+				currentTarget = null;
 			}
-			animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
+			if (currentTargetItem && pathComplete()) {
+				if (weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
+				{
+					removeWeapon(false);
+					addWeapon(currentTargetItem.itemInstance);
+				}
+				else if (!weaponSlot && currentTargetItem.itemInstance.type == ItemInventory.Type.Weapon)
+					addWeapon(currentTargetItem.itemInstance);
+				else if (items.Count < inventoryCapacity)
+				{
+					items.Add(currentTargetItem.itemInstance);
+					currentTargetItem.gameObject.SetActive(false);
+				}
+				currentTargetItem = null;
+			}
+		}
+		animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
+	}
+
+	public void RetainMove(bool stopMove = true) {
+		moveRetainer++;
+		if (stopMove) {
+			Debug.Log("move stopped");
+			agent.SetDestination(transform.position);
 		}
 	}
 
+	public void ReleaseMove() {
+		moveRetainer--;
+	}
+
 	void TryAttackTarget() {
+		if (moveRetained)
+			return ;
 		if (IsAtAttackRange(currentTarget)) {
 			transform.LookAt(currentTarget.transform);
 			if (unit.attackCooldown <= 0.0f) {
@@ -73,6 +89,8 @@ public class Actor : MonoBehaviour {
 	}
 
 	public bool IsAtAttackRange(Actor target) {
+		if (agent == null || target.agent == null)
+			return false;
 		float range = agent.radius + unit.weaponAttackRange + target.agent.radius;
 		return (transform.position - target.transform.position).sqrMagnitude <= range * range;
 	}
@@ -85,7 +103,7 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void OrderMoveToTarget(Vector3 destination) {
-		if (unit && !unit.isAlive)
+		if (moveRetained || (unit && !unit.isAlive))
 			return ;
 		if (agent) {
 			agent.SetDestination(destination);
@@ -96,13 +114,17 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void OrderAttackTarget(Actor target) {
-		if (unit && !unit.isAlive)
+		if (moveRetained || (unit && !unit.isAlive))
 			return ;
 		currentTarget = target;
 		currentTargetItem = null;
 	}
 
 	public bool OrderUseSpell(int spellIndex, Vector3 targetPoint, Actor targetActor, out string error) {
+		if (moveRetained) {
+			error = "you can't attack right now";
+			return false;
+		}
 		if (unit && !unit.isAlive) {
 			error = "can't attack when you're dead... noob";
 			return false;
@@ -118,7 +140,7 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void OrderLootItem(ItemEntity item) {
-		if (unit && !unit.isAlive)
+		if (moveRetained || (unit && !unit.isAlive))
 			return ;
 		if (agent) {
 			agent.SetDestination(item.transform.position);

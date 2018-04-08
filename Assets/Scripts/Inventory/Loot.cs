@@ -35,7 +35,7 @@ public class Loot : MonoBehaviour {
 		float rand = Random.Range(0f, 100f);
 		if (rand > 99f) return (ItemInventory.Rarity.Legendary);
 		if (rand > 95f) return (ItemInventory.Rarity.Epic);
-		if (rand > 90f) return (ItemInventory.Rarity.Magic);
+		if (rand > 90f) return (ItemInventory.Rarity.Rare);
 		if (rand > 70f) return (ItemInventory.Rarity.Uncommon);
 		return (ItemInventory.Rarity.Common);
 	}
