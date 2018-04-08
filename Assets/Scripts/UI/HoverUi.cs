@@ -68,8 +68,9 @@ public class HoverUi : MonoBehaviour
 		{
 			hoverText.text = 
 				  "Level       : " + inv.level +
-				"\nDamage      : " + Mathf.RoundToInt(inv.minDamage) + "-" + Mathf.RoundToInt(inv.maxDamage) +
-				"\nAttackSpeed : " + inv.attackSpeed;
+				"\nDamage      : " + (long)inv.minDamage + "-" + (long)inv.maxDamage +
+				"\nAttackSpeed : " + inv.attackSpeed +
+				"\nDps         : " + (long)((inv.minDamage + inv.maxDamage) / inv.attackSpeed * 0.5f);
 		}
 		else
 			hoverText.text = item.ToString();
