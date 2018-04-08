@@ -12,6 +12,7 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public KeyCode actionKey;
 
 	private Image img;
+	private Image cooldown;
 	private CanvasGroup group;
 
 	public bool locked = false;
@@ -23,6 +24,7 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	void Awake()
 	{
 		img = GetComponent<Image>();
+		cooldown = transform.Find("Cooldown").GetComponent<Image>();
 		group = GetComponent<CanvasGroup>();
 	}
 	void Start()
@@ -102,6 +104,17 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			{
 				PlayerEntityController.instance.UseSpell(spell);
 			}
-		} 
+			if (spell.currentCooldown > 0f)
+			{
+				float prc = spell.currentCooldown / spell.cooldown;
+				cooldown.fillAmount = prc;
+				cooldown.enabled = true;
+			}
+			else
+			{
+				cooldown.enabled = false;
+				
+			}
+		}
 	}
 }
