@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class ItemEntity : MonoBehaviour {
 
-	public ItemInventory itemPrefab;
-	[HideInInspector]public ItemInventory itemInstance = null;
+	public ItemInventory itemPrefab;// Prefab, do not modify
+	[HideInInspector]public ItemInventory itemInstance = null;// Linked item
 
-	public int maxLootNB = 1;
-	public Loot.Type type;
-	public Loot.Rarity rarity;
+	public int maxLootNB = 1;// Max loot in once
 
 	void Start () {
 	}

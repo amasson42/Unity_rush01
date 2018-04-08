@@ -60,8 +60,8 @@ public class HoverUi : MonoBehaviour
 		pos.y += y + 20;
 		canvas.enabled = true;
 		rect.position = pos;
-		border.color = Loot.RarityColors[(int)item.rarity];
-		ItemInventory inv = item.itemPrefab;
+		border.color = Loot.RarityColors[(int)item.itemInstance.rarity];
+		ItemInventory inv = item.itemInstance;
 		if (inv)
 		{
 			hoverText.text = 

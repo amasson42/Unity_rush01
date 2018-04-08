@@ -10,10 +10,14 @@ public class Unit : MonoBehaviour {
 	// Hero stats
 	public int level = 1; // current level
 	public int currentExperience = 0;
+	public static readonly int baseRequiredExperience = 30;
 	public static int RequiredExperienceAtLevel(int level) {
-		if (level < 2)
-			return 10 * level + 20;
-		return RequiredExperienceAtLevel(level - 2) + RequiredExperienceAtLevel(level - 1);
+		/* ADD QHONORE */
+		return ((int)(baseRequiredExperience * Mathf.Pow(1.25f, level - 1)));
+		/* END ADD QHONORE */
+		// if (level < 2)
+		// 	return 10 * level + 20;
+		// return RequiredExperienceAtLevel(level - 2) + RequiredExperienceAtLevel(level - 1);
 	}
 	[HideInInspector] public int requiredExperience; // the remaining experience we want to level up
 	public int experienceValue {get {return level * 5;}} // the experience collected when killed

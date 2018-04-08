@@ -14,9 +14,9 @@ public class Actor : MonoBehaviour {
 	[HideInInspector] public Actor currentTarget = null;
 
 	/* ADD QHONORE */
-	/*[HideInInspector] */public ItemEntity currentTargetItem = null;
+	[HideInInspector] public ItemEntity currentTargetItem = null;
 
-	/*[HideInInspector] */public List<ItemInventory> items;
+	[HideInInspector] public List<ItemInventory> items;
 	/* END ADD QHONORE */
 
  	void Start() {
