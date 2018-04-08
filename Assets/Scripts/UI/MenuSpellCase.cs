@@ -14,26 +14,34 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	private Image img;
 	private CanvasGroup group;
 
-	[SerializeField]
-	private SpellCaster spell = null;
+	public bool locked = false;
+	public SpellCaster spell = null;
 	private Vector3 position;
-
+	private Transform parent;
+	private int index;
 
 	void Awake()
 	{
 		img = GetComponent<Image>();
 		group = GetComponent<CanvasGroup>();
-		position = transform.position;
 	}
 	void Start()
 	{
 		LoadSpell(spell);
 	}
-	
 
 
 	public void OnBeginDrag(PointerEventData data)
     {
+		if (!spell)
+		{
+			data.pointerDrag = null;
+			return ;
+		}
+		parent = transform.parent;
+		index = transform.GetSiblingIndex();
+		transform.SetParent(transform.root);
+		position = transform.position;
 		group.blocksRaycasts = false;
     }
     public void OnDrag(PointerEventData data)
@@ -42,8 +50,10 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 	public void OnEndDrag(PointerEventData data)
 	{
+		transform.SetParent(parent);
 		group.blocksRaycasts = true;
 		transform.position = position;
+		transform.SetSiblingIndex(index);
 		GameObject obj = data.pointerCurrentRaycast.gameObject;
 		if (obj == null)
 		{
@@ -61,12 +71,13 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 				LoadSpell(gg.spell);
 				gg.LoadSpell(null);
 			}
-			Debug.Log("drop : " + data.pointerCurrentRaycast.gameObject);
 		}
 	}
 
 	public void LoadSpell(SpellCaster spellCaster)
 	{
+		if (spell && locked)
+			return;
 		spell = spellCaster;
 		if (!spell)
 		{

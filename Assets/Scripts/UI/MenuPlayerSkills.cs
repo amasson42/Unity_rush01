@@ -14,24 +14,63 @@ public class MenuPlayerSkills : MonoBehaviour {
 
 	private MenuInterface menu;
 	private Text txtDescription;
-	private Text txtSpell;
 	private Text txtStats;
+	private GridLayoutGroup align;
+
+	private Transform tabSpell;
+
+
+	void SetDescription(SpellCaster caster)
+	{
+		if (!caster)
+		{
+			txtDescription.text = "";
+		}
+		else
+		{
+			txtDescription.text = caster.info;
+		}
+	}
+
+	void OnHoverEnter(GameObject obj)
+	{
+		MenuSpellCase sp = obj.GetComponent<MenuSpellCase>();
+		SetDescription(sp ? sp.spell : null);
+	}
+	void OnHoverExit(GameObject obj)
+	{
+		SetDescription(null);
+	}
 
 	void Start ()
 	{
 		menu = GetComponent<MenuInterface>();
 		txtDescription = transform.Find("Menu/TabDescription/Text").GetComponent<Text>();
-		txtSpell = transform.Find("Menu/TabSpell/Text").GetComponent<Text>();
 		txtStats = transform.Find("Menu/TabStats/Text").GetComponent<Text>();
+		tabSpell = transform.Find("Menu/TabSpell");
+		align = tabSpell.GetComponent<GridLayoutGroup>();
 
 		
-		txtSpell.text = "";
 		txtDescription.text = "";
 		foreach (SpellCaster cast in player.spells)
 		{
-			txtSpell.text += cast.name + ": mana cost(" + cast.manaCost + ")\n";
-			txtDescription.text += cast.info + "\n";
+			GameObject obj = Instantiate(menuSpellCasePrefab.gameObject, Vector3.zero, Quaternion.identity,
+				tabSpell);
+			if (obj)
+			{
+				MenuSpellCase spell;
+				if (spell = obj.GetComponent<MenuSpellCase>())
+				{
+					spell.LoadSpell(cast);
+					spell.locked = true;
+				}
+				MenuHoverEvent hover = obj.AddComponent<MenuHoverEvent>();
+				hover.OnHoverEnterEvent += OnHoverEnter;
+				hover.OnHoverExitEvent += OnHoverExit;
+			}
 		}
+		LayoutRebuilder.ForceRebuildLayoutImmediate(tabSpell.GetComponent<RectTransform>());
+		align.enabled = false;
 	}
 	
 	void Update ()
