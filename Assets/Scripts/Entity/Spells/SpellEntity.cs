@@ -9,14 +9,6 @@ public abstract class SpellEntity : MonoBehaviour {
 	public Vector3 pointTarget;
 	public int skillLevel = 1;
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
-
 	public virtual bool CanBeCastedBy(SpellCaster caster, out string error) {
 		// childs should check here if there is a valid target or position point close enough
 		error = "valid target";

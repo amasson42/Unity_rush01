@@ -8,6 +8,8 @@ public class SpellCaster : MonoBehaviour {
 	public float manaCost;
 	public float cooldown;
 	public float currentCooldown;
+	public string name;
+	public string info;
 	[HideInInspector] public Actor actorTarget;
 	[HideInInspector] public Vector3 pointTarget;
 	public SpellEntity spellEntityPrefab; // this prefab contains only a spell scripts child of spellEntity
