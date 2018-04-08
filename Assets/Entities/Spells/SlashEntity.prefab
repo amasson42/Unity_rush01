@@ -73,7 +73,7 @@ MonoBehaviour:
   caster: {fileID: 0}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
-  skillLevel: 3
+  skillLevel: 1
 --- !u!135 &135344778652323856
 SphereCollider:
   m_ObjectHideFlags: 1
