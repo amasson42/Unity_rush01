@@ -26,13 +26,21 @@ public class MenuPlayerInventory : MonoBehaviour {
 		menu = GetComponent<MenuInterface>();
 		description = transform.Find("Menu/TabDescription/Text").GetComponent<Text>();
 		for (int i = 0; i < list.Count; ++i)
-			list[i].caseId = i++;
+		{
+			list[i].caseId = i;
+			list[i].inv = this;
+		}
+		equip.inv = this;
 	}
 	
 	void UpdateInv()
 	{
-		for (int i = 0; i < list.Count; ++i)
+		int i;
+		for (i = 0; i < list.Count && i < player.items.Count; ++i)
 			list[i].LoadItem(player.items[i]);
+		for (; i < list.Count; ++i)
+			list[i].LoadItem(null);
+		equip.LoadItem(player.weaponSlot);
 	}
 
 	void Update ()
