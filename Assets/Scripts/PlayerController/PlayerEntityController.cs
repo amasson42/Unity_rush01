@@ -106,7 +106,7 @@ public class PlayerEntityController : MonoBehaviour {
 				actor.OrderAttackTarget(null);
 			onMove = false;
 		}
-		if (actor.pathComplete())
+		if (actor.PathComplete())
 			moveMarkNode.SetActive(false);
 		followCamera.horizontalAngle += Input.GetAxis("Vertical");
 		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
