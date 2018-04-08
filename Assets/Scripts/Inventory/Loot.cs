@@ -22,7 +22,9 @@ public class Loot : MonoBehaviour {
 		for (int i = 0; i < lootNB; ++i)
 		{
 			Vector3 position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));
-			Quaternion rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
+			Quaternion rotation = Quaternion.Euler(0, 0, 0);
+			if (loot.itemPrefab.type != ItemInventory.Type.InstantPotion)
+				rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
 			loot = Instantiate(loot, position, rotation);
 			loot.itemInstance = Instantiate(loot.itemPrefab, position, transform.rotation);
 			generateStats(ref loot.itemInstance, level);
@@ -49,6 +51,8 @@ public class Loot : MonoBehaviour {
 
 	void generateStats(ref ItemInventory instance, int level)
 	{
+		if (instance.type == ItemInventory.Type.InstantPotion)
+			return;
 		instance.rarity = getItemRarity();
 		instance.weaponName = ItemInventory.RarityStrings[(int)instance.rarity] + " " + instance.weaponName;
 		instance.level = level;

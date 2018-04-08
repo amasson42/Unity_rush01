@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 114202702328135830}
   - component: {fileID: 114973549273118652}
   - component: {fileID: 114390983312565506}
+  - component: {fileID: 114995607785744244}
   m_Layer: 9
   m_Name: Lambent_Female
   m_TagString: unitEntity
@@ -2521,6 +2522,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentTargetItem: {fileID: 0}
   items: []
+  weaponSlot: {fileID: 0}
+  inventoryCapacity: 12
 --- !u!114 &114390983312565506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2532,7 +2535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChance: 100
+  lootChance: 8
   loots:
   - {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
   - {fileID: 114752237385947478, guid: a8e3ca5f6f3e64979855b3bb0d998849, type: 2}
@@ -2576,11 +2579,26 @@ MonoBehaviour:
   currentMana: 0
   baseMana: 0
   manaRegenProportion: 0.01
-  weaponAttackDamage: 7
+  weaponAttackMin: 0
+  weaponAttackMax: 0
   weaponAttackPeriod: 1.2
   weaponAttackRange: 1
   weaponAttackAnimation: 1
   attackCooldown: 0
+--- !u!114 &114995607785744244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307421231969354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootChance: 100
+  loots:
+  - {fileID: 114913186531231324, guid: 2fb64837bcc62475f81de5be45a47c6b, type: 2}
 --- !u!135 &135373729130116896
 SphereCollider:
   m_ObjectHideFlags: 1
