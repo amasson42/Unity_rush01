@@ -28,7 +28,8 @@ public class MenuPlayerSkills : MonoBehaviour {
 		}
 		else
 		{
-			txtDescription.text = caster.info;
+			txtDescription.text = "<size=20>" + caster.name + "</size>\n" +
+				caster.info;
 		}
 	}
 
