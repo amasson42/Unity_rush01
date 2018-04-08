@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler {
 
 	public ItemInventory item;
+	public int caseId;
+	public bool equip = false;
 
 	private Image img;
 	private CanvasGroup group;
@@ -21,7 +23,15 @@ public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler,
 		img = GetComponent<Image>();
 		group = GetComponent<CanvasGroup>();
 	}
+	void Start()
+	{
+	}
 
+	public void LoadItem(ItemInventory it)
+	{
+		item = it;
+		img.sprite = it.sprite;
+	}
 
 	public void OnBeginDrag(PointerEventData data)
     {

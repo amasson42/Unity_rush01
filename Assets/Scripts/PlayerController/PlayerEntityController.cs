@@ -7,13 +7,13 @@ using System;
 public class PlayerEntityController : MonoBehaviour {
 
 	public FollowCamera followCamera;
-	public Text errorActionText;
+	// public Text errorActionText;
 
 	public GameObject moveMarkNode;
 
 	private Actor actor;
 	private Unit unit;
-	private float lastErrorText;
+	// private float lastErrorText;
 
 	public static PlayerEntityController instance;
 
@@ -44,8 +44,8 @@ public class PlayerEntityController : MonoBehaviour {
 
 	void Start () {
 		followCamera.visualTarget = actor.gameObject;
-		errorActionText.text = "";
-		lastErrorText = Time.time;
+		// errorActionText.text = "";
+		// lastErrorText = Time.time;
 	}
 	
 
@@ -110,8 +110,8 @@ public class PlayerEntityController : MonoBehaviour {
 			moveMarkNode.SetActive(false);
 		followCamera.horizontalAngle += Input.GetAxis("Vertical");
 		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
-		if (Time.time - lastErrorText > 3.0f)
-			errorActionText.text = "";
+		// if (Time.time - lastErrorText > 3.0f)
+			// errorActionText.text = "";
 	}
 
 	void LateUpdate()
@@ -120,7 +120,7 @@ public class PlayerEntityController : MonoBehaviour {
 	}
 
 	void PutErrorText(string text) {
-		errorActionText.text = text;
-		lastErrorText = Time.time;
+		// errorActionText.text = text;
+		// lastErrorText = Time.time;
 	}
 }
