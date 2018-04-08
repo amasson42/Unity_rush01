@@ -13,6 +13,7 @@ public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
 	private Image img;
 	private CanvasGroup group;
+	public MenuPlayerInventory inv;
 
 	private Vector3 position;
 	private Transform parent;
@@ -30,7 +31,16 @@ public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler,
 	public void LoadItem(ItemInventory it)
 	{
 		item = it;
-		img.sprite = it.sprite;
+		if (it)
+		{
+			img.sprite = it.sprite;
+			img.color = Color.white;
+		}
+		else
+		{
+			img.sprite = null;
+			img.color = new Color(1, 1, 1, 0.33f);
+		}
 	}
 
 	public void OnBeginDrag(PointerEventData data)
@@ -59,6 +69,10 @@ public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler,
 		GameObject obj = data.pointerCurrentRaycast.gameObject;
 		if (obj == null)
 		{
+			if (equip)
+				inv.player.RemoveWeapon();
+			else
+				inv.player.RemoveFromInventory(item);
 		}
 	}
     public void OnDrop(PointerEventData data)
@@ -69,6 +83,10 @@ public class MenuInventoryCase : MonoBehaviour, IBeginDragHandler, IDragHandler,
 			MenuInventoryCase gg = obj.GetComponent<MenuInventoryCase>();
 			if (gg)
 			{
+				if (equip)
+					inv.player.SwapInventoryToWeaponSlot(gg.item);
+				else if (gg.equip)
+					inv.player.SwapInventoryToWeaponSlot(item);
 			}
 		}
 	}

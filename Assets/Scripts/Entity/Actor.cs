@@ -16,7 +16,7 @@ public class Actor : MonoBehaviour {
 	[HideInInspector] public List<ItemInventory> items;
 	public bool inventoryChanged = false;
 	public ItemInventory weaponSlot = null;
-	public int inventoryCapacity = 12;
+	public int inventoryCapacity = 15;
 	public bool moveRetained {get {return moveRetainer > 0;}}
 	private int moveRetainer = 0;
 
@@ -170,6 +170,8 @@ public class Actor : MonoBehaviour {
 
 	public void AddWeapon(ItemInventory weapon)
 	{
+		if (!weapon)
+			return;
 		if (!weaponSlot && weapon.type == ItemInventory.Type.Weapon)
 		{
 			weaponSlot = weapon;
@@ -194,7 +196,8 @@ public class Actor : MonoBehaviour {
 
 	public void SwapInventoryToWeaponSlot(ItemInventory item)
 	{
-		RemoveWeapon(true, false);
+		if (weaponSlot)
+			RemoveWeapon(true, false);
 		RemoveFromInventory(item, true);
 	}
 
