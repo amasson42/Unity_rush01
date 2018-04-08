@@ -2506,8 +2506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 114756536379116060}
-  manaCost: 1
-  cooldown: 3
+  manaCost: 5
+  cooldown: 8
   currentCooldown: 0
   name: Dash
   info: Charge toward the target ennemy
@@ -2531,8 +2531,8 @@ MonoBehaviour:
   manaCost: 5
   cooldown: 3
   currentCooldown: 0
-  name: Shock
-  info: Throw a fireball in the cursor direction
+  name: Fireball
+  info: Throw a fireball in the cursor direction... Sooo original
   icon: {fileID: 21300000, guid: f485560d82f6f004a871dd2809e75063, type: 3}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
@@ -2550,8 +2550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 114756536379116060}
-  manaCost: 3
-  cooldown: 1
+  manaCost: 10
+  cooldown: 5
   currentCooldown: 0
   name: Slash
   info: Turn around to hit every near ennemies
@@ -2602,8 +2602,8 @@ MonoBehaviour:
   currentMana: 30
   baseMana: 30
   manaRegenProportion: 0.01
-  weaponAttackMin: 0
-  weaponAttackMax: 0
+  weaponAttackMin: 1
+  weaponAttackMax: 2
   weaponAttackPeriod: 1
   weaponAttackRange: 1
   weaponAttackAnimation: 2
@@ -2646,8 +2646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 114756536379116060}
-  manaCost: 5
-  cooldown: 1
+  manaCost: 40
+  cooldown: 50
   currentCooldown: 0
   name: ElecVortex
   info: Create a strong force field to pull the close ennemies
