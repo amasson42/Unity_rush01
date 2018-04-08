@@ -2602,8 +2602,8 @@ MonoBehaviour:
   currentMana: 30
   baseMana: 30
   manaRegenProportion: 0.01
-  weaponAttackMin: 1
-  weaponAttackMax: 2
+  weaponAttackMin: 10
+  weaponAttackMax: 15
   weaponAttackPeriod: 1
   weaponAttackRange: 1
   weaponAttackAnimation: 2
