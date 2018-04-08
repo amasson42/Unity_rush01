@@ -27,6 +27,7 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	}
 	void Start()
 	{
+		LoadSpell(spell);
 	}
 	
 
@@ -44,15 +45,24 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		group.blocksRaycasts = true;
 		transform.position = position;
 		GameObject obj = data.pointerCurrentRaycast.gameObject;
-		Debug.Log(obj);
 		if (obj == null)
 		{
-			spell = null;
-			img.color = new Color(1, 1, 1, 0.5f);
+			LoadSpell(null);
 		}
 	}
     public void OnDrop(PointerEventData data)
 	{
+		GameObject obj = data.pointerDrag;
+		if (obj)
+		{
+			MenuSpellCase gg = obj.GetComponent<MenuSpellCase>();
+			if (gg)
+			{
+				LoadSpell(gg.spell);
+				gg.LoadSpell(null);
+			}
+			Debug.Log("drop : " + data.pointerCurrentRaycast.gameObject);
+		}
 	}
 
 	public void LoadSpell(SpellCaster spellCaster)
@@ -60,11 +70,13 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		spell = spellCaster;
 		if (!spell)
 		{
-			img.overrideSprite = null;
+			spell = null;
+			img.color = new Color(1, 1, 1, 0.5f);
+			img.sprite = null;
 		}
 		else
 		{
-			img.overrideSprite = spell.icon;
+			img.sprite = spell.icon;
 		}
 	}
 
@@ -78,7 +90,6 @@ public class MenuSpellCase : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			if (Input.GetKey(actionKey))
 			{
 				PlayerEntityController.instance.UseSpell(spell);
-				// spell.Use();
 			}
 		} 
 	}
