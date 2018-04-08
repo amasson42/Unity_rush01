@@ -5,23 +5,30 @@ using UnityEngine;
 public class Shock : SpellEntity {
 
 	float delay = 0.4f;
+	bool delayPassed = false;
 	bool dead = false;
 
 	// Use this for initialization
 	void Start() {
 		Vector3 direction = pointTarget - transform.position;
+		direction.y = 0;
 		caster.transform.LookAt(pointTarget);
 		direction.Normalize();
 		pointTarget = transform.position + direction * 8.0f;
 		caster.animator.SetTrigger("Attack1");
 		caster.OrderStopMove();
+		caster.RetainMove();
 	}
 	
 	// Update is called once per frame
 	void Update() {
-		if (delay > 0.0f)
+		if (!delayPassed) {
 			delay -= Time.deltaTime;
-		else if (!dead) {
+			if (delay <= 0.0f) {
+				delayPassed = true;
+				caster.ReleaseMove();
+			}
+		} else if (!dead) {
 			transform.position = Vector3.MoveTowards(transform.position, pointTarget, 8.0f * Time.deltaTime);
 			if ((transform.position - pointTarget).sqrMagnitude < 0.1f)
 			{

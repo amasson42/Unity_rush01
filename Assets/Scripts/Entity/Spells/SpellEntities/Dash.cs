@@ -5,7 +5,6 @@ using UnityEngine;
 public class Dash : SpellEntity {
 
 	void Start() {
-		caster.transform.LookAt(actorTarget.transform.position);
 		caster.agent.speed += 12.0f;
 		caster.OrderAttackTarget(actorTarget);
 	}

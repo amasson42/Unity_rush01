@@ -13,14 +13,17 @@ public class Slash : SpellEntity {
 		caster.animator.SetTrigger("Attack2");
 		hits = new List<Actor>();
 		caster.OrderStopMove();
+		caster.RetainMove();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		transform.position = caster.transform.position;
 		lifeTime -= Time.deltaTime;
-		if (lifeTime <= 0.0f)
+		if (lifeTime <= 0.0f) {
 			Destroy(gameObject);
+			caster.ReleaseMove();
+		}
 		caster.transform.Rotate(new Vector3(0, -2 * 360.0f * Time.deltaTime, 0));
 	}
 

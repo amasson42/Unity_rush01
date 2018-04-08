@@ -74,6 +74,7 @@ public class PlayerEntityController : MonoBehaviour {
 			else
 				unit.LevelUp();
 		}
+		
 		if (MenuManager.OnInterface())
 			return ;
 		RaycastHit hit = GetClickedRaycast();
@@ -105,29 +106,10 @@ public class PlayerEntityController : MonoBehaviour {
 				actor.OrderAttackTarget(null);
 			onMove = false;
 		}
+		if (actor.pathComplete())
+			moveMarkNode.SetActive(false);
 		followCamera.horizontalAngle += Input.GetAxis("Vertical");
 		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
-		/*
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			string error;
-			if (!actor.OrderUseSpell(0, hit.point, hit.collider.GetComponent<Actor>(), out error))
-				PutErrorText(error);
-		}
-		if (Input.GetKeyDown(KeyCode.W)) {
-			string error;
-			if (!actor.OrderUseSpell(1, hit.point, hit.collider.GetComponent<Actor>(), out error))
-				PutErrorText(error);
-		}
-		if (Input.GetKeyDown(KeyCode.E)) {
-			string error;
-			if (!actor.OrderUseSpell(2, hit.point, hit.collider.GetComponent<Actor>(), out error))
-				PutErrorText(error);
-		}
-		if (Input.GetKeyDown(KeyCode.R)) {
-			string error;
-			if (!actor.OrderUseSpell(3, hit.point, hit.collider.GetComponent<Actor>(), out error))
-				PutErrorText(error);
-		}*/
 		if (Time.time - lastErrorText > 3.0f)
 			errorActionText.text = "";
 	}

@@ -1156,6 +1156,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1979361333915138, guid: 8f597d701ec85445e9caeafb7546ff1d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f597d701ec85445e9caeafb7546ff1d, type: 2}
   m_IsPrefabParent: 0
@@ -5114,12 +5118,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007854369}
---- !u!114 &1028615482 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114147080888347466, guid: d045c43f3fc4a48268d25259f7bc971f,
-    type: 2}
-  m_PrefabInternal: {fileID: 338343466}
-  m_Script: {fileID: 11500000, guid: 980153eda26d14cfa95c6ca747559169, type: 3}
 --- !u!1 &1031338743
 GameObject:
   m_ObjectHideFlags: 0
@@ -5570,27 +5568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc7f815753b4c29807549e792dc5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEntityController: {fileID: 1028615482}
-  highlightNode: {fileID: 0}
-  highlightNodeLight: {fileID: 0}
-  unit: {fileID: 1770511178}
-  lifeBarMask: {fileID: 268471260}
-  lifeText: {fileID: 656888399}
-  manaBarMask: {fileID: 1042965094}
-  manaText: {fileID: 725334237}
-  levelText: {fileID: 663170266}
-  experienceBarMask: {fileID: 601099477}
-  showStatsButton: {fileID: 1228848496}
-  statsPanel: {fileID: 476361434}
-  strengthText: {fileID: 483915820}
-  dexterityText: {fileID: 467892740}
-  vitalityText: {fileID: 1549666449}
-  energyText: {fileID: 1341511247}
-  pointsText: {fileID: 1606396954}
-  enemyPanel: {fileID: 1651594707}
-  enemyNameText: {fileID: 502428681}
-  enemyLifeBarMask: {fileID: 1508480836}
-  enemyLifeText: {fileID: 741651297}
 --- !u!1 &1121168495
 GameObject:
   m_ObjectHideFlags: 0
