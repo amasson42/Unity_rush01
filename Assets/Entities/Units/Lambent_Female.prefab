@@ -1357,7 +1357,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1225555713466246}
-  m_LocalRotation: {x: -0.00000072838316, y: -0.68016547, z: 0.1669352, w: 0.713798}
+  m_LocalRotation: {x: -0.0000007283832, y: -0.6801655, z: 0.16693522, w: 0.71379805}
   m_LocalPosition: {x: 0.00027182, y: -0.00060679996, z: -0.00309769}
   m_LocalScale: {x: 0.99999154, y: 0.9999992, z: 0.9999923}
   m_Children:
@@ -2535,7 +2535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChance: 8
+  lootChance: 100
   loots:
   - {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
   - {fileID: 114752237385947478, guid: a8e3ca5f6f3e64979855b3bb0d998849, type: 2}
@@ -2579,8 +2579,8 @@ MonoBehaviour:
   currentMana: 0
   baseMana: 0
   manaRegenProportion: 0.01
-  weaponAttackMin: 0
-  weaponAttackMax: 0
+  weaponAttackMin: 10
+  weaponAttackMax: 15
   weaponAttackPeriod: 1.2
   weaponAttackRange: 1
   weaponAttackAnimation: 1
