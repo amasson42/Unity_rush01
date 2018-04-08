@@ -41,6 +41,11 @@ public class MenuPlayerInventory : MonoBehaviour {
 			menu.Toggle();
 		if (!player || !menu.Visible())
 			return ;
+		if (player.inventoryChanged)
+		{
+			UpdateInv();
+			player.inventoryChanged = false;
+		}
 		description.text = "test";
 	}
 }
