@@ -55,4 +55,9 @@ public class SpellCaster : MonoBehaviour {
 		spell.actorTarget = actorTarget;
 		spell.pointTarget = pointTarget;
 	}
+	public bool CanUse()
+	{
+		string error;
+		return (caster.unit && caster.unit.CanPayCostForSpell(this, out error));
+	}
 }

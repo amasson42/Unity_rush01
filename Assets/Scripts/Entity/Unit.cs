@@ -86,7 +86,7 @@ public class Unit : MonoBehaviour {
 	public void TakeDamages(float amount, Unit sender) {
 		currentHealth -= amount;
 		if (currentHealth <= 0.0f) {
-			currentHealth = -1.0f;
+			currentHealth = 0.0f;
 			sender.GainExperiencePoints(experienceValue);
 			actor.PlayDeadAnimation();
 			actor.RemoveFromGame(5.0f);

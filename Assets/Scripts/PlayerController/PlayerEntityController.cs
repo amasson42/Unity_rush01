@@ -15,6 +15,8 @@ public class PlayerEntityController : MonoBehaviour {
 	private Unit unit;
 	private float lastErrorText;
 
+	public static PlayerEntityController instance;
+
 	static bool _rayOk = false;
 	static RaycastHit _hitOk;
 	public static RaycastHit GetClickedRaycast()
@@ -33,14 +35,33 @@ public class PlayerEntityController : MonoBehaviour {
 		return (col ? col.GetComponent<T>() : default(T));
 	}
 
-	void Start () {
+	void Awake()
+	{
+		instance = this;	
 		actor = GetComponent<Actor>();
 		unit = GetComponent<Unit>();
+	}
+
+	void Start () {
 		followCamera.visualTarget = actor.gameObject;
 		errorActionText.text = "";
 		lastErrorText = Time.time;
 	}
 	
+
+	public bool UseSpell(SpellCaster sc) {
+		if (actor.unit && !actor.unit.isAlive) {
+			// error = "can't attack when you're dead... noob";
+			return false;
+		}
+		RaycastHit hit = PlayerEntityController.GetClickedRaycast();
+		sc.actorTarget = hit.transform.GetComponent<Actor>();
+		sc.pointTarget = hit.point;
+		string error;
+		return sc.TryCast(out error);
+	}
+
+
 	private bool onMove = false;
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Z))//TODO for debug

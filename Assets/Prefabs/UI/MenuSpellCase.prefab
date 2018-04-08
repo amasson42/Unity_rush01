@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224493004090791946}
   - component: {fileID: 222907052448449086}
   - component: {fileID: 114189180808759074}
+  - component: {fileID: 225817020318013608}
   - component: {fileID: 114315901320744034}
   m_Layer: 5
   m_Name: MenuSpellCase
@@ -68,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionKey: 113
+  spell: {fileID: 0}
 --- !u!222 &222907052448449086
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -88,7 +90,18 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 20}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 45, y: 0}
+  m_SizeDelta: {x: 70, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225817020318013608
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111696853967446}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
