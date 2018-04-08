@@ -2520,6 +2520,8 @@ MonoBehaviour:
   spells: []
   loots: []
   currentTarget: {fileID: 0}
+  currentTargetItem: {fileID: 0}
+  items: []
 --- !u!114 &114081823457765446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2534,6 +2536,7 @@ MonoBehaviour:
   lootChance: 100
   loots:
   - {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
+  - {fileID: 114752237385947478, guid: a8e3ca5f6f3e64979855b3bb0d998849, type: 2}
 --- !u!114 &114483793419014448
 MonoBehaviour:
   m_ObjectHideFlags: 1

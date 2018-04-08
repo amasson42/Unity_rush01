@@ -6,6 +6,7 @@ public class ItemInventory : MonoBehaviour {
 
 	public ItemEntity entityPrefab;// Prefab, do not modify
 	public ItemEntity entityInstance = null;// Linked entity
+	public Sprite sprite;
 	public Loot.Type type = Loot.Type.Weapon;
 	public Loot.Rarity rarity;
 	public string weaponName;
