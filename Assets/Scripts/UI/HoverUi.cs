@@ -34,7 +34,8 @@ public class HoverUi : MonoBehaviour
 	void Update()
 	{
 		RaycastHit hit = PlayerEntityController.GetClickedRaycast();
-		if (hit.collider && hit.collider.gameObject.layer != LayerMask.NameToLayer("World"))
+		if (hit.collider && hit.collider.gameObject.layer != LayerMask.NameToLayer("World") &&
+			!MenuManager.OnInterface())
 		{
 			hover = hit.collider.GetComponent<Actor>();
 			ShowItemInfo(hit.collider.GetComponent<ItemEntity>());
