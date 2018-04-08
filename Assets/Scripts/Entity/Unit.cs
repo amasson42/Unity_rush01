@@ -39,6 +39,7 @@ public class Unit : MonoBehaviour {
 	public float baseMana = 30; // base max mana before adding bonus
 	public float manaRegenProportion = 0.01f;
 	public float maxMana {get {return baseMana + energy * 3;}} // computed max mana from base with bonus
+	public float factorDamages = 1.0f;
 
 	// Weapon
 	public float weaponAttackMin; // base weapon attack damages
@@ -50,7 +51,7 @@ public class Unit : MonoBehaviour {
 	[HideInInspector] public float attackCooldown = 0.0f;
 
 	// Fight
-	public float currentDamage {get {return weaponAttackDamage * (1.0f + (float)strength * 0.05f);}} // current damage with bonus
+	public float currentDamage {get {return factorDamages * weaponAttackDamage * (1.0f + (float)strength * 0.05f);}} // current damage with bonus
 	public float currentSpellDamages {get {return 1.0f + energy * 0.01f;}} // multiply spell damages
 	public float currentWeaponPeriod {get {
 		return weaponAttackPeriod * (1.0f / (1.0f + 0.01f * (float)dexterity)); // current cooldown with bonus

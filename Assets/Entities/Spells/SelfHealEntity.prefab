@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114865029570199214}
   - component: {fileID: 199452800622138826}
   - component: {fileID: 198693791090532240}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SelfHealEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   caster: {fileID: 0}
   actorTarget: {fileID: 0}
   pointTarget: {x: 0, y: 0, z: 0}
-  skillLevel: 1
+  skillLevel: 3
 --- !u!198 &198693791090532240
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -677,7 +677,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2

@@ -8,11 +8,13 @@ public class SelfHeal : SpellEntity {
 	void Start () {
 		if (caster.unit)
 			caster.unit.TakeDamages(-50.0f * caster.unit.currentSpellDamages, caster.unit);
+		Destroy(this, 2.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Destroy(this, 1.0f);
+		transform.position = caster.transform.position;
+		caster.unit.TakeDamages(-25.0f * caster.unit.currentSpellDamages * Time.deltaTime, caster.unit);
 	}
 
 	public override bool CanBeCastedBy(SpellCaster caster, out string error) {
