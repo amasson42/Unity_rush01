@@ -1357,7 +1357,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1225555713466246}
-  m_LocalRotation: {x: -0.0000007283832, y: -0.6801655, z: 0.16693522, w: 0.71379805}
+  m_LocalRotation: {x: -0.0000007283831, y: -0.68016547, z: 0.1669352, w: 0.713798}
   m_LocalPosition: {x: 0.00027182, y: -0.00060679996, z: -0.00309769}
   m_LocalScale: {x: 0.99999154, y: 0.9999992, z: 0.9999923}
   m_Children:
@@ -2513,6 +2513,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35357165ed52f4dae89eaf45f63222f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingSound:
+  - {fileID: 8300000, guid: a7fdde9dbb81b4167a27a8aeb1e4ce58, type: 3}
+  - {fileID: 8300000, guid: d4aedaaa8b7044b028ce7da7409a8fab, type: 3}
+  - {fileID: 8300000, guid: 2a0632631fb04405fa85f4a5a5d01a4d, type: 3}
   animator: {fileID: 95220946704670346}
   weaponTransformSlot: {fileID: 0}
   agent: {fileID: 195914588553561768}
@@ -2522,6 +2526,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentTargetItem: {fileID: 0}
   items: []
+  inventoryChanged: 0
   weaponSlot: {fileID: 0}
   inventoryCapacity: 12
 --- !u!114 &114390983312565506
@@ -2579,6 +2584,7 @@ MonoBehaviour:
   currentMana: 0
   baseMana: 0
   manaRegenProportion: 0.01
+  factorDamages: 1
   weaponAttackMin: 10
   weaponAttackMax: 15
   weaponAttackPeriod: 1.2

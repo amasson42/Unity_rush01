@@ -2514,6 +2514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35357165ed52f4dae89eaf45f63222f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingSound:
+  - {fileID: 8300000, guid: 2a0632631fb04405fa85f4a5a5d01a4d, type: 3}
+  - {fileID: 8300000, guid: a7fdde9dbb81b4167a27a8aeb1e4ce58, type: 3}
+  - {fileID: 8300000, guid: d4aedaaa8b7044b028ce7da7409a8fab, type: 3}
   animator: {fileID: 95947861907083772}
   weaponTransformSlot: {fileID: 0}
   agent: {fileID: 195679490154031848}
@@ -2523,6 +2527,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentTargetItem: {fileID: 0}
   items: []
+  inventoryChanged: 0
   weaponSlot: {fileID: 0}
   inventoryCapacity: 12
 --- !u!114 &114081823457765446
@@ -2569,6 +2574,7 @@ MonoBehaviour:
   currentMana: 0
   baseMana: 0
   manaRegenProportion: 0.01
+  factorDamages: 1
   weaponAttackMin: 20
   weaponAttackMax: 25
   weaponAttackPeriod: 2.1

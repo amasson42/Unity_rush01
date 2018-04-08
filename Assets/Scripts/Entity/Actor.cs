@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Actor : MonoBehaviour {
 
+	public AudioClip[] attackingSound;
+	public AudioClip[] footStepSounds;
 	public Animator animator;
 	public Transform weaponTransformSlot = null;
 	public NavMeshAgent agent;
@@ -31,10 +33,6 @@ public class Actor : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.K) && items.Count > 0)//TEST DEBUG
-			SwapInventoryToWeaponSlot(items[0]);//TEST DEBUG
-		if (Input.GetKeyDown(KeyCode.L) && items.Count > 0)//TEST DEBUG
-			RemoveFromInventory(items[0]);//TEST DEBUG
 		if (agent == null)
 			return ;
 		if (unit && unit.isAlive && !moveRetained) {
@@ -76,8 +74,15 @@ public class Actor : MonoBehaviour {
 			if (unit.attackCooldown <= 0.0f) {
 				unit.ResetAttackCooldown();
 				animator.SetTrigger("Attack" + unit.weaponAttackAnimation);
+				if (attackingSound.Length > 0)
+					AudioSource.PlayClipAtPoint(attackingSound[Random.Range(0, attackingSound.Length)], transform.position);
 			}
 		}
+	}
+
+	public void PlayFoodStep() {
+		if (footStepSounds.Length > 0)
+			AudioSource.PlayClipAtPoint(footStepSounds[Random.Range(0, footStepSounds.Length)], transform.position);
 	}
 
 	public void AnimationAttackPointEvent() {

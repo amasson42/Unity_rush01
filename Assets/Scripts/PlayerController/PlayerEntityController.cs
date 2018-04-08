@@ -15,7 +15,13 @@ public class PlayerEntityController : MonoBehaviour {
 	private Unit unit;
 	// private float lastErrorText;
 
+	// sounds
+	public AudioSource ambiantMusicPlayer;
+	public AudioSource fightMusicPlayer;
+
 	public static PlayerEntityController instance;
+
+	public int fighters = 0;
 
 	static bool _rayOk = false;
 	static RaycastHit _hitOk;
@@ -60,7 +66,6 @@ public class PlayerEntityController : MonoBehaviour {
 		string error;
 		return sc.TryCast(out error);
 	}
-
 
 	private bool onMove = false;
 	void Update () {
