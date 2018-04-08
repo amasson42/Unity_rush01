@@ -2633,6 +2633,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followCamera: {fileID: 0}
   moveMarkNode: {fileID: 0}
+  ambiantMusicPlayer: {fileID: 0}
+  fightMusicPlayer: {fileID: 0}
+  fighters: 0
 --- !u!114 &114210099961771680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2723,6 +2726,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35357165ed52f4dae89eaf45f63222f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingSound: []
+  footStepSounds:
+  - {fileID: 8300000, guid: 22b5b26c3429f42c482afafb562afc2a, type: 3}
+  - {fileID: 8300000, guid: 8033517be0e2b4a939b3f8ffacc6f4d5, type: 3}
+  - {fileID: 8300000, guid: a948133482bd9461cbcb85c1b36c59b7, type: 3}
   animator: {fileID: 95093480927099800}
   weaponTransformSlot: {fileID: 4636513648200304}
   agent: {fileID: 195465197522422932}
