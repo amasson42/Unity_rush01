@@ -1357,7 +1357,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1225555713466246}
-  m_LocalRotation: {x: -0.0000007283831, y: -0.68016547, z: 0.1669352, w: 0.713798}
+  m_LocalRotation: {x: -0.00000072838316, y: -0.6801655, z: 0.16693522, w: 0.71379805}
   m_LocalPosition: {x: 0.00027182, y: -0.00060679996, z: -0.00309769}
   m_LocalScale: {x: 0.99999154, y: 0.9999992, z: 0.9999923}
   m_Children:
@@ -2517,6 +2517,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a7fdde9dbb81b4167a27a8aeb1e4ce58, type: 3}
   - {fileID: 8300000, guid: d4aedaaa8b7044b028ce7da7409a8fab, type: 3}
   - {fileID: 8300000, guid: 2a0632631fb04405fa85f4a5a5d01a4d, type: 3}
+  footStepSounds: []
   animator: {fileID: 95220946704670346}
   weaponTransformSlot: {fileID: 0}
   agent: {fileID: 195914588553561768}
@@ -2540,7 +2541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChance: 100
+  lootChance: 10
   loots:
   - {fileID: 114435388967926334, guid: b1768e107f38b4e908e6e589f2120b09, type: 2}
   - {fileID: 114752237385947478, guid: a8e3ca5f6f3e64979855b3bb0d998849, type: 2}
@@ -2602,7 +2603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3b0bf634db4443ab17c4ec5e9e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChance: 100
+  lootChance: 20
   loots:
   - {fileID: 114913186531231324, guid: 2fb64837bcc62475f81de5be45a47c6b, type: 2}
 --- !u!135 &135373729130116896
