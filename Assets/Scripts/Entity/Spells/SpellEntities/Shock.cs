@@ -11,7 +11,6 @@ public class Shock : SpellEntity {
 	// Use this for initialization
 	void Start() {
 		Vector3 direction = pointTarget - transform.position;
-		direction.y = 0;
 		caster.transform.LookAt(pointTarget);
 		direction.Normalize();
 		pointTarget = transform.position + direction * 8.0f;

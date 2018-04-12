@@ -47,5 +47,7 @@ public class FollowCamera : MonoBehaviour {
 		if (cameraNode)
 			cameraNode.transform.localPosition = Vector3.MoveTowards(cameraNode.transform.localPosition, new Vector3(0, 0, -cameraHeightDistance), moveSpeed * Time.deltaTime);
 		transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, new Vector3(horizontalAngle, verticalAngle, rollAngle), angularSpeed * Time.deltaTime);
+		horizontalAngle += Input.GetAxis("Vertical");
+		verticalAngle += -Input.GetAxis("Horizontal");
 	}
 }

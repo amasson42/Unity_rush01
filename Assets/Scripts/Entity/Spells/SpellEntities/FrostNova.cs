@@ -42,7 +42,10 @@ public class FrostNova : SpellEntity {
 		Actor colactor = collider.gameObject.GetComponent<Actor>();
 		if (colactor) {
 			if (caster.unit && caster.unit.team != colactor.unit.team) {
-				iceBlocks.Add(GameObject.Instantiate(iceBlockPrefab, colactor.transform.position, colactor.transform.rotation));
+				GameObject iceBlock = GameObject.Instantiate(iceBlockPrefab, colactor.transform.position, colactor.transform.rotation);
+				iceBlock.transform.SetParent(colactor.transform);
+				iceBlocks.Add(iceBlock);
+
 				colactor.RetainMove();
 				frosted.Add(colactor);
 			}

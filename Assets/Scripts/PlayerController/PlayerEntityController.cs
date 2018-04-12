@@ -83,7 +83,7 @@ public class PlayerEntityController : MonoBehaviour {
 		if (MenuManager.OnInterface())
 			return ;
 		RaycastHit hit = GetClickedRaycast();
-		if (Input.GetMouseButton(0))
+		if (hit.collider && Input.GetMouseButton(0))
 		{
 			Actor hitActor;
 			ItemEntity item;
@@ -113,8 +113,6 @@ public class PlayerEntityController : MonoBehaviour {
 		}
 		if (actor.PathComplete())
 			moveMarkNode.SetActive(false);
-		followCamera.horizontalAngle += Input.GetAxis("Vertical");
-		followCamera.verticalAngle += -Input.GetAxis("Horizontal");
 		// if (Time.time - lastErrorText > 3.0f)
 			// errorActionText.text = "";
 	}
