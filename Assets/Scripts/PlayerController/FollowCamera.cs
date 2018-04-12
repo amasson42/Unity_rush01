@@ -15,12 +15,11 @@ public class FollowCamera : MonoBehaviour {
 
 	public GameObject visualTarget;
 
+	public Vector3 offset;
 	public float cameraHeightDistance = 10.0f;
 	public float horizontalAngle = 30.0f;
 	public float verticalAngle = 0.0f;
 	public float rollAngle = 0.0f;
-	public float moveSpeed = 10.0f;
-	public float angularSpeed = 180.0f;
 	public bool rayCastWatcher = false;
 
 	void Start () {
@@ -43,10 +42,10 @@ public class FollowCamera : MonoBehaviour {
 		else if (verticalAngle < -360.0f)
 			verticalAngle = -360.0f;
 		if (visualTarget)
-			transform.position = Vector3.MoveTowards(transform.position, visualTarget.transform.position, moveSpeed * Time.deltaTime);
+			transform.position = visualTarget.transform.position + offset;
 		if (cameraNode)
-			cameraNode.transform.localPosition = Vector3.MoveTowards(cameraNode.transform.localPosition, new Vector3(0, 0, -cameraHeightDistance), moveSpeed * Time.deltaTime);
-		transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, new Vector3(horizontalAngle, verticalAngle, rollAngle), angularSpeed * Time.deltaTime);
+			cameraNode.transform.localPosition = new Vector3(0, 0, -cameraHeightDistance);
+		transform.localEulerAngles = new Vector3(horizontalAngle, verticalAngle, rollAngle);
 		horizontalAngle += Input.GetAxis("Vertical");
 		verticalAngle += -Input.GetAxis("Horizontal");
 	}
